@@ -74,7 +74,7 @@
 
 // export default App;
 
-
+import './styles/App.css'; 
 // MarkdownEditor.js
 import React, { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
