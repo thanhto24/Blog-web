@@ -3,7 +3,7 @@ import { PostContext } from '../contexts/PostContext';
 
 const PostList = () => {
   const { posts } = useContext(PostContext); // Get posts from context
-
+  
   return (
     <div className="mx-auto max-w-2xl p-4">
       <h1 className="mb-6 text-center text-3xl font-bold">Posts</h1>

@@ -4,16 +4,19 @@ import React, { useState } from "react";
 
 import PostCreate from './components/PostCreate.js';
 import PostList from './components/PostList';
-import PostContext from './contexts/PostContext';
+import {PostProvider} from './contexts/PostContext';
+import Home from './pages/Home/Home.js';
 
 
 const App = () => {
   return (
     <div className="App">
-      <PostContext>
+      {/* <PostProvider>
         <PostCreate />
         <PostList />
-      </PostContext>
+      </PostProvider> */}
+
+      <Home />
     </div>
   );
 }

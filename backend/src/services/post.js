@@ -20,6 +20,7 @@ const createPost = async (data) => {
 
 // Fetch all posts
 const getAllPosts = async () => {
+  console.log("Getting all posts");
   return await Post.find();
 };
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-// import './styles/index.css'; // Nếu bạn có CSS
+import ReactDOM from 'react-dom';
+import App from './App'; // Ensure this path is correct
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Render the root component (App) into the root div
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
