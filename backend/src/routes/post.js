@@ -10,6 +10,9 @@ router.post('/', postController.createPost);
 // Get all posts
 router.get('/', postController.getAllPosts);
 
+// Get related posts
+router.get('/related', postController.getRelatedPosts);
+
 // Get a single post by ID
 router.get('/:id', postController.getPostById);
 

@@ -23,6 +23,17 @@ const getAllPosts = async (req, res) => {
   }
 };
 
+//Controller for getting related posts
+const getRelatedPosts = async (req, res) => {
+  try {
+    const posts = await postService.getRelatedPosts();
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
 // Controller for getting a single post by ID or slug
 const getPostById = async (req, res) => {
   try {
@@ -57,6 +68,7 @@ const deletePost = async (req, res) => {
 module.exports = {
   createPost,
   getAllPosts,
+  getRelatedPosts,
   getPostById,
   updatePost,
   deletePost,

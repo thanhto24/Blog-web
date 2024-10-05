@@ -6,6 +6,7 @@ import PostCreate from './components/PostCreate.js';
 import PostList from './components/PostList';
 import {PostProvider} from './contexts/PostContext';
 import Home from './pages/Home/Home.js';
+import Detail from './pages/Detail/Detail.js';
 
 
 const App = () => {
@@ -16,7 +17,12 @@ const App = () => {
         <PostList />
       </PostProvider> */}
 
-      <Home />
+        {
+          <PostProvider>
+            <Home />
+            <Detail />
+          </PostProvider>
+        }
     </div>
   );
 }

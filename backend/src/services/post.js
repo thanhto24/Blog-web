@@ -24,6 +24,11 @@ const getAllPosts = async () => {
   return await Post.find();
 };
 
+const getRelatedPosts = async () => {
+  console.log("Getting related posts");
+  return await Post.find();
+}
+
 // Fetch a single post by ID
 const getPostById = async (id) => {
   return await Post.findById(id);
@@ -49,6 +54,7 @@ module.exports = {
   createPost,
   getAllPosts,
   getPostById,
+  getRelatedPosts,
   updatePost,
   deletePost,
 };
