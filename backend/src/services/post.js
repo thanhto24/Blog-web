@@ -1,6 +1,7 @@
 // services/postService.js
 
 const Post = require("../models/Post");
+const mongoose = require('mongoose');
 
 // Create a new post
 const createPost = async (data) => {
@@ -31,7 +32,8 @@ const getRelatedPosts = async () => {
 
 // Fetch a single post by ID
 const getPostById = async (id) => {
-  return await Post.findById(id);
+  console.log("Getting post by ID: ", id);
+  return await Post.findOne({ _id: id });
 };
 
 // Update an existing post

@@ -12,7 +12,7 @@ const ListPostRecommend = () => {
     <div>
       <h2>Recommended Posts</h2>
       {relatedPosts.length === 0 ? (
-        <p>No related posts found.</p>
+        <p>No related posts found.</p>    
       ) : (
         <ul>
           {relatedPosts.map((post) => (

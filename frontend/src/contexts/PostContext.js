@@ -6,6 +6,7 @@ export const PostContext = createContext();
 export const PostProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [relatedPosts, setRelatedPosts] = useState([]); // State for related posts
+  const [postWithId, setPostWithId] = useState([]);
 
   const fetchAllPosts = async () => {
     try {
@@ -47,6 +48,28 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const fetchPostById = async function (id) {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setPostWithId(data);
+    } catch (error) {
+      console.error('Failed to fetch post:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchPostById('66ff53cd07dde53c28d41837');
+  }, []);
+
   const createPost = async (postData) => {
     try {
       const response = await fetch('http://localhost:5000/posts', {
@@ -67,7 +90,7 @@ export const PostProvider = ({ children }) => {
   };
 
   return (
-    <PostContext.Provider value={{ posts, relatedPosts, fetchAllPosts, fetchRelatedPosts, createPost }}>
+    <PostContext.Provider value={{ posts, relatedPosts, postWithId, fetchAllPosts, fetchRelatedPosts, fetchPostById, createPost }}>
       {children}
     </PostContext.Provider>
   );

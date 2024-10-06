@@ -1,13 +1,15 @@
 import React from 'react';
 
 import ListPostRecommend from './components/ListPostRecommend';
-import { PostProvider } from '../../contexts/PostContext';
+import PostDetail from '../../components/PostDetail';
 
-const Detail = () => {
+const Detail = (id) => {
   return (
     <div>
       <h1>Detail</h1>
         {/* <PostProvider> */}
+
+            <PostDetail />
             <ListPostRecommend />
         {/* </PostProvider> */}
     </div>

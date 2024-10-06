@@ -19,7 +19,7 @@ const App = () => {
 
         {
           <PostProvider>
-            <Home />
+            {/* <Home /> */}
             <Detail />
           </PostProvider>
         }
