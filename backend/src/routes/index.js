@@ -5,10 +5,14 @@ const router = express.Router();
 
 // Manually import all your route files
 const postRoutes = require('./post');
-// const userRoutes = require('./users');
+const imageRoutes = require('./image');
 
 // Manually add each set of routes
 router.use('/posts', postRoutes);
-// router.use('/users', userRoutes);
+router.use('/images', imageRoutes);
+
+//Add middle where here like this
+// router.use('/posts', MiddlewareFunction[SchemaOfPost], postRoutes);
+
 
 module.exports = router;

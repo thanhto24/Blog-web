@@ -33,7 +33,7 @@ const getRelatedPosts = async () => {
 // Fetch a single post by ID
 const getPostById = async (id) => {
   console.log("Getting post by ID: ", id);
-  return await Post.findOne({ _id: id });
+  return await Post.findById(id);
 };
 
 // Update an existing post

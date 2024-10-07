@@ -29,7 +29,7 @@ app.use('/', routes);
 // Start the server
 const PORT = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send('Hello World!');
 });
 
