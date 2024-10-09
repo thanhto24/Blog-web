@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { showPopup } from './Popup'; // Import the showPopup function
 
-const ImageSite = () => {
+const ImageSite = ({ refreshImages }) => {
   const [images, setImages] = useState([]);
 
   const fetchImages = async () => {
@@ -21,21 +21,27 @@ const ImageSite = () => {
     }
   };
 
+  // Call fetchImages when component mounts
   useEffect(() => {
     fetchImages();
   }, []);
+
+  // Call fetchImages when refreshImages is triggered
+  useEffect(() => {
+    if (refreshImages) {
+      fetchImages();
+    }
+  }, [refreshImages]);
 
   const handleCopyUrl = (id) => {
     const url = `http://localhost:5000/images/${id}`;
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        // Show success message using the showPopup function
         showPopup('URL copied to clipboard!', 'success');
       })
       .catch((err) => {
         console.error('Failed to copy URL: ', err);
-        // Show error message using the showPopup function
         showPopup('Failed to copy URL.', 'fail');
       });
   };
@@ -45,17 +51,20 @@ const ImageSite = () => {
       <div className="grid grid-cols-1 gap-4">
         {images.length > 0 ? (
           images.map((image) => (
-            <div key={image._id} className="rounded-md bg-white p-4 shadow">
+            <div
+              key={image._id}
+              className="overflow-hidden rounded-md bg-white p-4 shadow"
+            >
               <img
                 src={`http://localhost:5000/images/${image._id}`}
                 alt={image.image_name}
-                className="h-30 w-full cursor-pointer rounded object-cover"
+                className="mb-2 h-20 w-full cursor-pointer rounded object-cover" // Set a consistent height
                 onClick={() => handleCopyUrl(image._id)}
               />
               <h3 className="mt-2 text-sm font-semibold text-gray-700">
                 {image.image_name || 'N/A'}
               </h3>
-              <p className="text-xs text-gray-500">
+              <p className="truncate text-xs text-gray-500">
                 {image.image_description || 'No description'}
               </p>
               <button
