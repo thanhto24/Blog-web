@@ -9,7 +9,7 @@ const PostList = () => {
       <h1 className="mb-6 text-center text-3xl font-bold">Posts</h1>
       <ul className="space-y-4">
         {posts.map((post) => (
-          <li key={post.id} className="rounded-lg border p-4 shadow-md">
+          <li key={post._id} className="rounded-lg border p-4 shadow-md">
             <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
             <pre className="whitespace-pre-wrap rounded bg-gray-100 p-2">
               {post.body}

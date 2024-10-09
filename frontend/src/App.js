@@ -1,28 +1,44 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Importing necessary routing components
 import './styles/App.css';
-// MarkdownEditor.js
-import React, { useState } from 'react';
-
-import PostCreate from './components/PostCreate.js';
+import PostCreate from './components/PostCreate';
 import PostList from './components/PostList';
 import { PostProvider } from './contexts/PostContext';
-import Home from './pages/Home/Home.js';
-import Detail from './pages/Detail/Detail.js';
-import ImageSite from './components/ImageSite.js';
-import ImageCreate from './components/ImageCreate.js';
+import PostAndImage from './components/PostAndImage';
+import Home from './pages/Home/Home';
+import Detail from './pages/Detail/Detail';
+import { Header, SignedInHeader } from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
-  return (
-    <div className="App">
+  const [user, setUser] = useState(null);
 
-      {/* <ImageCreate />
-      <ImageSite /> */}
-      <PostProvider>
-        {/* <Home /> */}
-        {/* <PostList /> */}
-        {/* <Detail /> */}
-        <PostCreate />
-      </PostProvider>
-    </div>
+  const login = (user) => {
+    setUser(user);
+  }; 
+
+  const logout = () => {
+    // Perform any necessary cleanup here, such as removing user data from local storage
+    // localStorage.removeItem('user'); 
+    setUser(null); // Reset the user state to null
+  };
+
+  return (
+    <Router>
+      <div className="App">
+        {user ? <SignedInHeader onLogout={logout} /> : <Header onLogin={login} />}
+        <PostProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create-post" element={<PostAndImage />} />
+            <Route path="/posts" element={<PostList />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            {/* Add more routes as necessary */}
+          </Routes>
+        </PostProvider>
+        <Footer />
+      </div>
+    </Router>
   );
 };
 
