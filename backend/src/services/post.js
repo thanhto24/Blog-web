@@ -1,12 +1,22 @@
 // services/postService.js
 
 const Post = require("../models/Post");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Create a new post
 const createPost = async (data) => {
   console.log("Post service post with data: ", data);
-  const { title, slug, body, tags, category, author, status } = data;
+  const {
+    title,
+    slug,
+    body,
+    tags,
+    category,
+    author,
+    thumbnail_url,
+    description,
+    status,
+  } = data;
   const newPost = new Post({
     title,
     slug,
@@ -14,6 +24,8 @@ const createPost = async (data) => {
     tags,
     category,
     author,
+    thumbnail_url,
+    description,
     status: status || "draft",
   });
   return await newPost.save();
@@ -28,7 +40,7 @@ const getAllPosts = async () => {
 const getRelatedPosts = async () => {
   console.log("Getting related posts");
   return await Post.find();
-}
+};
 
 // Fetch a single post by ID
 const getPostById = async (id) => {

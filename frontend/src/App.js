@@ -32,7 +32,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/create-post" element={<PostAndImage />} />
             <Route path="/posts" element={<PostList />} />
-            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/posts/:id" element={<Detail />} />
             {/* Add more routes as necessary */}
           </Routes>
         </PostProvider>

@@ -66,9 +66,9 @@ export const PostProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    fetchPostById('66ff53cd07dde53c28d41837');
-  }, []);
+  // useEffect(() => {
+  //   fetchPostById('66ff53cd07dde53c28d41837');
+  // }, []);
 
   const createPost = async (postData) => {
     try {

@@ -5,6 +5,7 @@ import remarkMath from 'remark-math';
 import 'katex/dist/katex.min.css'; // Import CSS for KaTeX
 import { PostContext } from '../contexts/PostContext';
 import TextInput from './TextInput';
+import { showPopup } from './Popup';
 
 const PostCreate = () => {
   const [title, setTitle] = useState('');
@@ -14,16 +15,18 @@ const PostCreate = () => {
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
   const [message, setMessage] = useState('');
+  const [thumbnail_url, setThumbnailUrl] = useState('');
+  const [description, setDescription] = useState('');
 
   const { createPost } = useContext(PostContext); // Get createPost from context
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const postData = { title, slug, body, tags, category, author };
+    const postData = { title, slug, body, tags, category, author, thumbnail_url, description };
 
     createPost(postData)
       .then(() => {
-        setMessage('Post created successfully!');
+        showPopup('Post created successfully', 'success');
         // Reset fields if needed
         // setTitle('');
         // setSlug('');
@@ -33,7 +36,7 @@ const PostCreate = () => {
         // setBody('');
       })
       .catch((error) => {
-        setMessage(`Error creating post: ${error.message}`);
+        showPopup('Failed to create post.' + error, 'fail');
       });
   };
 
@@ -96,14 +99,30 @@ const PostCreate = () => {
         className="mt-4"
       />
 
+      {/* Thumbnail URL */}
+      <TextInput
+        value={thumbnail_url}
+        onChange={(e) => setThumbnailUrl(e.target.value)}
+        placeholder="Thumbnail URL"
+        required
+        className="mt-4"
+      />
+
+      {/* Description */}
+      <TextInput
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Description"
+        required
+        className="mt-4"
+      />
+
       <button
         onClick={handleSubmit}
         className="mx-auto mt-6 flex w-40 justify-center rounded-lg bg-blue-500 py-2 text-white transition duration-200 hover:bg-blue-600"
       >
         Create Post
       </button>
-
-      {message && <p className="mt-4 text-green-600">{message}</p>}
     </div>
   );
 };

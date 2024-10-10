@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PostContext } from '../contexts/PostContext';
 
-const PostDetail = () => {
-    const { postWithId } = useContext(PostContext);
-    // console.log(postWithId);
-    
-    // return <div>Loading ...</div>
+const PostDetail = ({id}) => {
+    const { postWithId, fetchPostById } = useContext(PostContext);
+    useEffect(() => {
+        fetchPostById(id);
+    }, [id]);
     
     return (
         <div className="mx-auto max-w-2xl p-4">

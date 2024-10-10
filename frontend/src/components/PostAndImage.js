@@ -26,7 +26,7 @@ const PostAndImage = () => {
             <h2 className="mb-4 text-2xl font-bold">Uploaded Images</h2>
 
             {/* Scrollable ImageSite with dynamic height */}
-            <div className="flex-1 overflow-y-auto max-h-[32rem] mb-4">
+            <div className={`flex-1 overflow-y-auto ${isFormVisible ? 'max-h-[40rem]' : 'max-h-[54rem]'} mb-4`}>
               <ImageSite refreshImages={refreshImages} />
             </div>
 
