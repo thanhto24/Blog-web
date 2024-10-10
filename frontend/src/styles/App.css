@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4e6e6;
+  height: 100vh;
+}
+
+.App{
+    height: 100vh;
+}

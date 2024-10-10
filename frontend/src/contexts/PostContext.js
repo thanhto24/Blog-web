@@ -7,7 +7,8 @@ export const PostProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [relatedPosts, setRelatedPosts] = useState([]); // State for related posts
   const [postWithId, setPostWithId] = useState([]);
-
+  const [postSearch, setpostSearch] = useState([]);
+  
   const fetchAllPosts = async () => {
     try {
       const response = await fetch('http://localhost:5000/posts', {
@@ -65,7 +66,7 @@ export const PostProvider = ({ children }) => {
 
   const fetchPostById = async function (id) {
     try {
-      const response = await fetch(`http://localhost:5000/posts/${id}`, {
+      const response = await fetch(`http://localhost:5000/posts/id/${id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -84,6 +85,24 @@ export const PostProvider = ({ children }) => {
   // useEffect(() => {
   //   fetchPostById('66ff53cd07dde53c28d41837');
   // }, []);
+
+  const fetchPostSearch = async (searchTerm) => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/search/${searchTerm}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setpostSearch(data);
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+    }
+  };
 
   const createPost = async (postData) => {
     try {
@@ -105,7 +124,7 @@ export const PostProvider = ({ children }) => {
   };
 
   return (
-    <PostContext.Provider value={{ posts, relatedPosts, postWithId, fetchAllPosts, fetchRelatedPosts, fetchPostById, createPost }}>
+    <PostContext.Provider value={{ posts, relatedPosts, postWithId, postSearch, fetchPostSearch, fetchAllPosts, fetchRelatedPosts, fetchPostById, createPost }}>
       {children}
     </PostContext.Provider>
   );

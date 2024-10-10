@@ -8,7 +8,7 @@ const PopularPost = ({ listPost }) => {
       <h1 className="mb-5 text-3xl font-bold">Popular Posts</h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {listPost.map((post) => (
-          <Link to={`/posts/${post._id}`} key={post._id} className="rounded-lg border p-4 shadow-md bg-white hover:shadow-lg transition-shadow">
+          <Link to={`/posts/id/${post._id}`} key={post._id} className="rounded-lg border p-4 shadow-md bg-white hover:shadow-lg transition-shadow">
             <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
             <img
               src={post.thumbnail_url || newsDefault} // Use short-circuiting for cleaner code

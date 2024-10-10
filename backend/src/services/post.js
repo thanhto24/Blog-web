@@ -77,6 +77,21 @@ const getPostById = async (id) => {
   return await Post.findById(id);
 };
 
+const getByCondition = async (searchTerm) => {
+  // Create a condition object to search in title, tag, and slug
+  const condition = {
+    $or: [
+      { title: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search in title
+      { tag: { $regex: searchTerm, $options: 'i' } },   // Case-insensitive search in tag
+      { slug: { $regex: searchTerm, $options: 'i' } }    // Case-insensitive search in slug
+    ]
+  };
+
+  // Find posts that match the condition
+  return await Post.find(condition);
+};
+
+
 // Update an existing post
 const updatePost = async (id, data) => {
   const post = await Post.findById(id);
@@ -98,6 +113,7 @@ module.exports = {
   getAllPosts,
   getPostById,
   getRelatedPosts,
+  getByCondition,
   updatePost,
   deletePost,
 };

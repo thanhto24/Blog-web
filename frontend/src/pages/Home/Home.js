@@ -25,7 +25,7 @@ const Home = () => {
         <div className="col-span-3 h-screen space-y-4 overflow-y-scroll bg-red-200 p-5">
           <h1 className="mb-5 text-3xl font-bold">Newest Post</h1>
           {posts.map((post) => (
-            <ShortPost key={post.id} post={post} />
+            <ShortPost key={post._id} post={post} />
           ))}
         </div>
       </div>

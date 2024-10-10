@@ -14,7 +14,10 @@ router.get('/', postController.getAllPosts);
 router.get('/related', postController.getRelatedPosts);
 
 // Get a single post by ID
-router.get('/:id', postController.getPostById);
+router.get('/id/:id', postController.getPostById);
+
+// Get posts by search term
+router.get('/search/:searchTerm', postController.getPostsBySearchTerm);
 
 // Update a post
 router.put('/:id', postController.updatePost);

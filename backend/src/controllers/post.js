@@ -53,6 +53,16 @@ const getPostById = async (req, res) => {
   }
 };
 
+// Controller for getting posts by search term
+const getPostsBySearchTerm = async (req, res) => {
+  try {
+    const posts = await postService.getByCondition(req.params.searchTerm);
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // Controller for updating a post
 const updatePost = async (req, res) => {
   try {
@@ -77,6 +87,7 @@ module.exports = {
   createPost,
   getAllPosts,
   getRelatedPosts,
+  getPostsBySearchTerm,
   getPostById,
   updatePost,
   deletePost,
