@@ -25,14 +25,22 @@ const getAllPosts = async (req, res) => {
 
 //Controller for getting related posts
 const getRelatedPosts = async (req, res) => {
+  const { data } = req.query; // Extract the 'data' query parameter
+
+  if (!data) {
+    return res.status(400).json({ error: "No data provided" });
+  }
+
+  const tags = data.split(","); // Split tags if multiple are passed
+
   try {
-    const posts = await postService.getRelatedPosts();
-    res.status(200).json(posts);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const relatedPosts = await postService.getRelatedPosts(tags); // Pass the tags to your function
+    res.json(relatedPosts);
+  } catch (error) {
+    console.error("Error fetching related posts:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 // Controller for getting a single post by ID or slug
 const getPostById = async (req, res) => {

@@ -30,21 +30,36 @@ export const PostProvider = ({ children }) => {
     fetchAllPosts();
   }, []);
 
-  const fetchRelatedPosts = async () => {
+  const fetchRelatedPosts = async (relatedData) => {
     try {
-      const response = await fetch('http://localhost:5000/posts/related', {
+      // Ensure relatedData is an array before joining
+      if (!Array.isArray(relatedData)) {
+        throw new Error('relatedData must be an array');
+      }
+  
+      // Convert relatedData array to a comma-separated string for the query
+      const query = relatedData.join(',');
+  
+      const response = await fetch(`http://localhost:5000/posts/related?data=${encodeURIComponent(query)}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
-
+  
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
-
+  
       const data = await response.json();
-      setRelatedPosts(data); // Store related posts separately
+  
+      // Ensure data is in the expected format before updating state
+      if (Array.isArray(data)) {
+        setRelatedPosts(data); // Store related posts separately
+      } else {
+        throw new Error('Unexpected response format: expected an array');
+      }
     } catch (error) {
       console.error('Failed to fetch related posts:', error);
+      // Optionally handle error state here, e.g., set an error message in state
     }
   };
 

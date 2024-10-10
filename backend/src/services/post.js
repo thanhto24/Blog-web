@@ -34,13 +34,42 @@ const createPost = async (data) => {
 // Fetch all posts
 const getAllPosts = async () => {
   console.log("Getting all posts");
-  return await Post.find();
+  return await Post.find().sort({ createdAt: -1 }); // Sort by createdAt in descending order
 };
 
-const getRelatedPosts = async () => {
-  console.log("Getting related posts");
-  return await Post.find();
+const getRelatedPosts = async (relatedData) => {
+  try {
+    console.log("Getting related posts");
+
+    // Initialize an array to hold all the unique related posts
+    const allRelatedPosts = new Set();
+
+    // Iterate over each tag in relatedData
+    for (const tag of relatedData) {
+      // Create regex patterns to find both starts with and contains matches
+      const regex = new RegExp(tag, 'i'); // Case-insensitive match
+
+      // Find posts for the current tag
+      const posts = await Post.find({
+        $or: [
+          { tags: { $regex: `^${regex.source}`, $options: 'i' } }, // Start with
+          { tags: { $regex: regex.source, $options: 'i' } }       // Contains
+        ]
+      });
+
+      // Add the found posts to the set (to avoid duplicates)
+      posts.forEach(post => allRelatedPosts.add(post._id.toString())); // Assuming post._id is a unique identifier
+    }
+
+    // Convert the Set back to an array of related posts
+    return await Post.find({ _id: { $in: [...allRelatedPosts] } });
+
+  } catch (error) {
+    console.error("Error fetching related posts:", error);
+    throw error; // Handle the error as needed
+  }
 };
+
 
 // Fetch a single post by ID
 const getPostById = async (id) => {
