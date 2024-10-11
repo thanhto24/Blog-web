@@ -4,12 +4,27 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');  // Import index.js from routes folder
 require('dotenv').config({path: 'src/config/.env'});
+const session = require('express-session');
+const passport = require('./services/auth'); // Load the service for Google Auth
 
 const app = express();
 
 // Middleware to parse JSON bodies
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Your frontend origin
+  credentials: true // This allows sending cookies with the request
+}));
 app.use(express.json());
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Initialize passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Connect to MongoDB (replace with your connection string)

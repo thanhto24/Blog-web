@@ -12,22 +12,10 @@ import Header from './components/Header'; // Use the new combined Header
 import Footer from './components/Footer';
 
 const App = () => {
-  const [user, setUser] = useState(null);
-
-  const login = (user) => {
-    setUser(user);
-  };
-
-  const logout = () => {
-    // Perform any necessary cleanup here, such as removing user data from local storage
-    // localStorage.removeItem('user');
-    setUser(null); // Reset the user state to null
-  };
-
   return (
     <Router>
       <div className="App">
-        <Header user={user} onLogin={login} onLogout={logout} />
+        <Header/>
         <PostProvider>
           <Routes>
             <Route path="/" element={<Home />} />
