@@ -20,8 +20,8 @@ router.post("/", upload.single("image"), async (req, res) => {
       image_data: req.file.buffer, // Save the buffer data
       image_name: req.body.image_name,
       image_description: req.body.image_description,
+      image_owner: req.body.image_owner,
     });
-
     await newImage.save();
     res.status(201).json(newImage);
   } catch (error) {
@@ -32,8 +32,10 @@ router.post("/", upload.single("image"), async (req, res) => {
 
 // Endpoint to retrieve all images
 router.get("/", async (req, res) => {
+  const image_owner = req.query.image_owner;
+  console.log("image_owner", image_owner);
   try {
-    const images = await Image.find({});
+    const images = await Image.find({ image_owner: image_owner });
 
     // Map over images and convert binary data to Base64
     const imagesWithBase64 = images.map((image) => ({

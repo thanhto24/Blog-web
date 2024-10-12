@@ -3,10 +3,12 @@ import { showPopup } from './Popup'; // Import the showPopup function
 
 const ImageSite = ({ refreshImages }) => {
   const [images, setImages] = useState([]);
+  const storedUser = localStorage.getItem('user');
+  const userEmail = storedUser ? JSON.parse(storedUser).email : '';
 
   const fetchImages = async () => {
     try {
-      const response = await fetch('http://localhost:5000/images', {
+      const response = await fetch(`http://localhost:5000/images?image_owner=${userEmail}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -57,7 +59,7 @@ const ImageSite = ({ refreshImages }) => {
             >
               <img
                 src={`http://localhost:5000/images/${image._id}`}
-                alt={image.image_name}
+                alt={image.image_name + '. This image created by ' + image.image_owner}
                 className="mb-2 h-20 w-full cursor-pointer rounded object-cover" // Set a consistent height
                 onClick={() => handleCopyUrl(image._id)}
               />

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const ImageCreate = ({ isFormVisible, setIsFormVisible, handleRefreshImages}) => {
+const ImageCreate = ({
+  isFormVisible,
+  setIsFormVisible,
+  handleRefreshImages,
+}) => {
   const [image, setImage] = useState({
     image_name: '',
     image_description: '',
@@ -19,6 +23,9 @@ const ImageCreate = ({ isFormVisible, setIsFormVisible, handleRefreshImages}) =>
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const storedUser = localStorage.getItem('user');
+    const userEmail = storedUser ? JSON.parse(storedUser).email : '';
+
     const formData = new FormData();
     formData.append('image', image.image_file);
     formData.append('image_name', image.image_name || image.image_file.name);
@@ -26,6 +33,7 @@ const ImageCreate = ({ isFormVisible, setIsFormVisible, handleRefreshImages}) =>
       'image_description',
       image.image_description || image.image_file.name
     );
+    formData.append('image_owner', userEmail); // Hardcoded user ID
 
     try {
       const response = await fetch('http://localhost:5000/images', {

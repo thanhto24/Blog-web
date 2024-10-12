@@ -3,9 +3,9 @@ const Image = require("../models/Image");
 const mongoose = require("mongoose");
 
 const uploadImage = async (data) => {
-  const { image_hashed, image_name, image_description, image_root } = data;
+  const { image_data, image_name, image_description, image_root } = data;
   const newImage = new Image({
-    image_hashed,
+    image_data,
     image_name,
     image_description,
     image_root,
