@@ -82,9 +82,9 @@ const Header = () => {
     <div className="sticky left-0 top-0 z-50 block w-full">
       {/* Ensuring header stays at the top */}
       <header className="flex items-center justify-between bg-white p-5 shadow-md">
-        <Link to="/" className="text-3xl font-bold">
+        <a href="/" className="text-3xl font-bold">
           Home
-        </Link>
+        </a>
         <SearchBar onSearch={(query) => console.log('Searching for:', query)} />
         <div className="flex items-center space-x-3">
           {user ? (

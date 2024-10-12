@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
+import CreateOwnPost from './components/CreateOwnPost';
 import PopularPost from './components/PopularPost';
 // import PostList from '../../components/PostList';
 import ShortPost from './components/ShortPost';
 import { PostContext } from '../../contexts/PostContext';
 import OtherFeature from './components/OtherFeature';
+import _ from 'lodash';
 
 const Home = () => {
   const { fetchAllPosts, posts } = useContext(PostContext);
@@ -12,13 +14,13 @@ const Home = () => {
     fetchAllPosts(); // Fetch posts when the component mounts
   }, []);
 
-  const n = posts.length;
   return (
     <>
+      <CreateOwnPost />
       <div className="grid grid-cols-10 gap-4">
         {/* PopularPost takes 7/10 (70%) */}
         <div className="col-span-7">
-          <PopularPost listPost={posts.slice(0, 6)} />
+          <PopularPost listPost={_.shuffle(posts).slice(0, 6)} />
         </div>
 
         {/* ShortPost takes 3/10 (30%) */}

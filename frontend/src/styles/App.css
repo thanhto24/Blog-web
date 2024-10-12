@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f4e6e6;
-  height: 100vh;
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    background-color: #f4e6e6;
+    height: 100vh;
 }
 
 .App{

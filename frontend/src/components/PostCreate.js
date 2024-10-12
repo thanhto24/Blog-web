@@ -22,7 +22,10 @@ const PostCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const postData = { title, slug, body, tags, category, author, thumbnail_url, description };
+    const storedUser = localStorage.getItem('user');
+    const userName = storedUser ? JSON.parse(storedUser).username : '';
+    console.log('userName', userName);
+    const postData = { title, slug, body, tags, category, author:userName, thumbnail_url, description };
 
     createPost(postData)
       .then(() => {
@@ -77,15 +80,6 @@ const PostCreate = () => {
         value={tags}
         onChange={(e) => setTags(e.target.value)}
         placeholder="Tags"
-        required
-        className="mt-4"
-      />
-
-      {/* Author */}
-      <TextInput
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        placeholder="Author"
         required
         className="mt-4"
       />
