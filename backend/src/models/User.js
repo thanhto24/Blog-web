@@ -19,6 +19,18 @@ const userSchema = new mongoose.Schema({
   profilePicture: {
     type: String,  // URL to the profile picture
   },
+  likedPosts: {
+    type: [String],  // Array of post IDs that the user has liked
+  },
+  following: {
+    type: [String],  // Array of user IDs that the user is following
+  },
+  followers: {
+    type: [String],  // Array of user IDs that are following the user
+  },
+  comments: {
+    type: [String],  // Array of comment IDs that the user has made
+  },
 });
 
 // Create the User model
