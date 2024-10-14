@@ -10,18 +10,24 @@ import Home from './pages/Home/Home';
 import Detail from './pages/Detail/Detail';
 import Header from './components/Header'; // Use the new combined Header
 import Footer from './components/Footer';
+import ScrollToTop from './components/AutoScrollTop';
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
-        <Header/>
+        <Header />
+        <div className="mt-[12rem]"></div>
         <PostProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/create-post" element={<PostAndImage />} />
             <Route path="/posts/id/:id" element={<Detail />} />
-            <Route path="/posts/search/:search" element={<PostSearchResult />} />
+            <Route
+              path="/posts/search/:search"
+              element={<PostSearchResult />}
+            />
             {/* Add more routes as necessary */}
           </Routes>
         </PostProvider>

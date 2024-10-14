@@ -79,13 +79,13 @@ const Header = () => {
   }, [navigate]); // Add navigate as a dependency
 
   return (
-    <div className="sticky left-0 top-0 z-50 block w-full">
+    <div className="fixed left-0 top-0 z-50 block w-full">
       {/* Ensuring header stays at the top */}
       <header className="flex items-center justify-between bg-white p-5 shadow-md">
         <a href="/" className="text-3xl font-bold">
           Home
         </a>
-        <SearchBar/>
+        <SearchBar />
         <div className="flex items-center space-x-3">
           {user ? (
             <>

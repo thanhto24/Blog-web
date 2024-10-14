@@ -8,6 +8,7 @@ import ActionBar from '../../components/ActionBar';
 const Detail = () => {
   const { id } = useParams();
   const { postWithId, fetchPostById } = useContext(PostContext);
+  window.scrollTo(0, 0);
 
   useEffect(() => {
     fetchPostById(id);

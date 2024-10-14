@@ -12,7 +12,7 @@ const PostAndImage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen p-6">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           {/* PostCreate component */}

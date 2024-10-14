@@ -10,13 +10,12 @@ const PostSearchResult = () => {
 
   useEffect(() => {
     console.log('Fetching posts based on search term:', search);
-    // Fetch posts based on the search term
     if (search !== 'khac') {
       fetchPostSearch(search);
     } else {
       fetchAllPosts();
     }
-  }, [search]); // Dependencies include search term
+  }, [search]);
 
   const safePostList = search !== 'khac' ? postSearch : posts;
 
@@ -26,13 +25,12 @@ const PostSearchResult = () => {
         Search Results
       </h2>
       <div className="max-h-80 min-h-screen overflow-y-auto">
-        {/* Ensure this div has a max height and overflow */}
         {safePostList.length > 0 ? (
-          <div className="grid min-h-screen w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
             {safePostList.map((post) => (
               <div
                 key={post.id}
-                className="w-96 transform rounded-lg border border-gray-300 bg-white p-3 px-2 transition-transform hover:scale-105 hover:shadow-lg"
+                className="mx-auto w-96 min-h-[150px] h-full transform transform-origin-center rounded-lg border border-gray-300 bg-white p-3 px-2 transition-transform hover:scale-105 hover:shadow-lg"
               >
                 <ShortPost post={post} />
               </div>
