@@ -11,6 +11,7 @@ import Detail from './pages/Detail/Detail';
 import Header from './components/Header'; // Use the new combined Header
 import Footer from './components/Footer';
 import ScrollToTop from './components/AutoScrollTop';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
