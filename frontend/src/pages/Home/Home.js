@@ -19,12 +19,14 @@ const Home = () => {
       <CreateOwnPost />
       <div className="grid grid-cols-10 gap-4">
         {/* PopularPost takes 7/10 (70%) */}
-        <div className="col-span-7">
+        <div className="col-span-7 p-5">
+          <h1 className="mb-5 text-3xl font-bold">Popular Posts</h1>
+
           <PopularPost listPost={_.shuffle(posts).slice(0, 6)} />
         </div>
 
         {/* ShortPost takes 3/10 (30%) */}
-        <div className="col-span-3 h-screen space-y-4 overflow-y-scroll bg-red-200 p-5">
+        <div className="col-span-3 mr-2 mt-4 h-screen space-y-4 overflow-y-scroll rounded-2xl bg-red-200 p-5">
           <h1 className="mb-5 text-3xl font-bold">Newest Post</h1>
           {posts.map((post) => (
             <ShortPost key={post._id} post={post} />

@@ -9,6 +9,41 @@ body {
     height: 100vh;
 }
 
-.App{
+.App {
     height: 100vh;
+}
+
+.marquee-container {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.marquee {
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    transition: transform 0.5s linear;
+    /* Smooth transition for stopping */
+}
+
+.marquee.scroll {
+    animation: scroll 10s linear infinite;
+    /* Speed of scrolling */
+}
+
+.marquee.stop {
+    animation: none;
+    /* Stop animation when hovered */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+        /* Move upwards */
+    }
 }
