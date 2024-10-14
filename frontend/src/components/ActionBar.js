@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { showPopup } from './Popup';
 
 const ActionBar = ({ postId }) => {
   const [liked, setLiked] = useState(false);
@@ -48,7 +49,7 @@ const ActionBar = ({ postId }) => {
       const data = await response.json();
       // Toggle the liked state based on the response
       setLiked(true); // Toggle the liked state
-    //   alert('Post liked'); // Notify user of the action
+      //   alert('Post liked'); // Notify user of the action
     } catch (error) {
       console.error('Failed to like post:', error);
     }
@@ -72,7 +73,7 @@ const ActionBar = ({ postId }) => {
       const data = await response.json();
       // Toggle the liked state based on the response
       setLiked(false); // Toggle the liked state
-    //   alert('Post unliked'); // Notify user of the action
+      //   alert('Post unliked'); // Notify user of the action
     } catch (error) {
       console.error('Failed to unlike post:', error);
     }
@@ -83,6 +84,10 @@ const ActionBar = ({ postId }) => {
     setLiked(false); // Reset liked state
     fetchCheckLike();
   }, [postId]); // Re-run check when postId changes
+
+  const handleReport = () => {
+    showPopup('This post has been reported successfully!', 'success');
+  };
 
   return (
     <div className="mx-auto mb-20 flex max-w-3xl justify-around rounded-lg bg-gray-100 py-4">
@@ -107,7 +112,10 @@ const ActionBar = ({ postId }) => {
       </button>
 
       {/* Report Button */}
-      <button className="flex items-center space-x-1 text-gray-700 hover:text-red-500">
+      <button
+        className="flex items-center space-x-1 text-gray-700 hover:text-red-500"
+        onClick={handleReport}
+      >
         <span role="img" aria-label="report">
           ⚠️
         </span>
