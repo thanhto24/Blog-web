@@ -77,8 +77,32 @@ const ActionBar = ({ postId }) => {
     setShowReportModal(false);
   };
 
+  const fetchSendEmail = async (reason) => {
+    try {
+      const response = await fetch('http://localhost:5000/email/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'thanhtovntmk@gmail.com',
+          subject: 'Report Post from Blog-web',
+          messageObj: {
+            link: 'http://localhost:3000/posts/id/' + postId,
+            msg: ['The post below has been reported!', `Reason: ${reason}`, 'Please check and take action!'],
+            },
+        }),
+      });
+      if (!response.ok)
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      showPopup('This post has been reported successfully!', 'success');
+    } catch (error) {
+      console.error('Failed to report post:', error);
+    }
+  };
+
   const handleReport = (reason) => {
-    // Handle report submission (e.g., send to your server)
+    fetchSendEmail(reason);
     console.log(`Report reason: ${reason}`);
     showPopup('This post has been reported successfully!', 'success');
   };
