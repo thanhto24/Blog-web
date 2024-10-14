@@ -85,7 +85,7 @@ const Header = () => {
         <a href="/" className="text-3xl font-bold">
           Home
         </a>
-        <SearchBar onSearch={(query) => console.log('Searching for:', query)} />
+        <SearchBar/>
         <div className="flex items-center space-x-3">
           {user ? (
             <>
