@@ -54,6 +54,30 @@ const ActionBar = ({ postId }) => {
     }
   };
 
+  const fetchUnlikeAction = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/users/unlike', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          postId: postId,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+      const data = await response.json();
+      // Toggle the liked state based on the response
+      setLiked(false); // Toggle the liked state
+    //   alert('Post unliked'); // Notify user of the action
+    } catch (error) {
+      console.error('Failed to unlike post:', error);
+    }
+  };
+
   // Fetch the initial like status when component mounts
   useEffect(() => {
     setLiked(false); // Reset liked state
@@ -65,7 +89,7 @@ const ActionBar = ({ postId }) => {
       {/* Like Button */}
       <button
         className={`flex items-center space-x-1 text-gray-700 hover:text-blue-500 ${liked ? 'text-blue-500' : ''}`}
-        onClick={fetchLikeAction} // Call fetchLikeAction directly
+        onClick={liked ? fetchUnlikeAction : fetchLikeAction}
       >
         {/* Conditional Rendering of Like Icon */}
         <span role="img" aria-label="like">

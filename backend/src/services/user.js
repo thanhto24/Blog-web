@@ -20,7 +20,17 @@ const checkLiked = async (email, postId) => {
   return false; // Post is not liked
 };
 
+const unlikePost = (email, postId) => {
+  // Find the user by email and update the likedPosts array
+  return User.findOneAndUpdate(
+    { email }, // Find by email
+    { $pull: { likedPosts: postId } }, // Use $pull to remove postId
+    { new: true, upsert: true } // Corrected typo: 'upsert'
+  );
+};
+
 module.exports = {
   likePost,
   checkLiked,
+  unlikePost,
 };
