@@ -57,7 +57,7 @@ const ActionBar = ({ postId }) => {
   const fetchUnlikeAction = async () => {
     try {
       const response = await fetch('http://localhost:5000/users/unlike', {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
