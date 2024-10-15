@@ -63,6 +63,15 @@ const getPostsBySearchTerm = async (req, res) => {
   }
 };
 
+const getUserPosts = async (req, res) => {
+  try {
+    const posts = await postService.getUserPosts(req.params.email);
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // Controller for updating a post
 const updatePost = async (req, res) => {
   try {
@@ -89,6 +98,7 @@ module.exports = {
   getRelatedPosts,
   getPostsBySearchTerm,
   getPostById,
+  getUserPosts,
   updatePost,
   deletePost,
 };

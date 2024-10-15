@@ -1,23 +1,33 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from '../contexts/PostContext';
 import { useParams } from 'react-router-dom';
 import ShortPost from '../pages/Home/components/ShortPost';
 
 const PostSearchResult = () => {
   const { search } = useParams();
-  const { postSearch, fetchPostSearch, posts, fetchAllPosts } =
-    useContext(PostContext);
+  const {
+    fetchAllPosts,
+    fetchPostSearch,
+    fetchUserPosts,
+    posts,
+    postSearch,
+    userPosts,
+  } = useContext(PostContext);
+  const [safePostList, setSafePostList] = useState([]);
 
   useEffect(() => {
     console.log('Fetching posts based on search term:', search);
-    if (search !== 'khac') {
-      fetchPostSearch(search);
-    } else {
+    if (search === 'khac') {
       fetchAllPosts();
+      setSafePostList(posts);
+    } else if (search === 'your-post') {
+      fetchUserPosts();
+      setSafePostList(userPosts);
+    } else {
+      fetchPostSearch(search);
+      setSafePostList(postSearch);
     }
   }, [search]);
-
-  const safePostList = search !== 'khac' ? postSearch : posts;
 
   return (
     <div className="mx-auto mt-10 min-h-screen min-w-max max-w-4xl rounded-lg bg-gray-100 p-4 shadow-md">
@@ -29,10 +39,10 @@ const PostSearchResult = () => {
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
             {safePostList.map((post) => (
               <div
-                key={post.id}
-                className="mx-auto w-96 min-h-[150px] h-full transform transform-origin-center rounded-lg border border-gray-300 bg-white p-3 px-2 transition-transform hover:scale-105 hover:shadow-lg"
+                key={post._id}
+                className="transform-origin-center mx-auto h-full min-h-[150px] w-96 transform rounded-lg border border-gray-300 bg-white p-3 px-2 transition-transform hover:scale-105 hover:shadow-lg"
               >
-                <ShortPost post={post} />
+                <ShortPost post={post} editMode={search==='your-post'}/>
               </div>
             ))}
           </div>

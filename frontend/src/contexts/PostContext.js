@@ -8,7 +8,29 @@ export const PostProvider = ({ children }) => {
   const [relatedPosts, setRelatedPosts] = useState([]); // State for related posts
   const [postWithId, setPostWithId] = useState([]);
   const [postSearch, setpostSearch] = useState([]);
-  
+  const [userPosts, setUserPosts] = useState([]);
+
+  const storedUser = localStorage.getItem('user');
+  const userEmail = storedUser ? JSON.parse(storedUser).email : '';
+
+  const fetchUserPosts = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/your-post/${userEmail}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setUserPosts(data);
+    } catch (error) {
+      console.error('Failed to fetch user posts:', error);
+    }
+  };
+
   const fetchAllPosts = async () => {
     try {
       const response = await fetch('http://localhost:5000/posts', {
@@ -29,6 +51,7 @@ export const PostProvider = ({ children }) => {
 
   useEffect(() => {
     fetchAllPosts();
+    fetchUserPosts();
   }, []);
 
   const fetchRelatedPosts = async (relatedData) => {
@@ -37,21 +60,24 @@ export const PostProvider = ({ children }) => {
       if (!Array.isArray(relatedData)) {
         throw new Error('relatedData must be an array');
       }
-  
+
       // Convert relatedData array to a comma-separated string for the query
       const query = relatedData.join(',');
-  
-      const response = await fetch(`http://localhost:5000/posts/related?data=${encodeURIComponent(query)}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
+
+      const response = await fetch(
+        `http://localhost:5000/posts/related?data=${encodeURIComponent(query)}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
-  
+
       const data = await response.json();
-  
+
       // Ensure data is in the expected format before updating state
       if (Array.isArray(data)) {
         setRelatedPosts(data); // Store related posts separately
@@ -80,18 +106,17 @@ export const PostProvider = ({ children }) => {
     } catch (error) {
       console.error('Failed to fetch post:', error);
     }
-  }
-
-  // useEffect(() => {
-  //   fetchPostById('66ff53cd07dde53c28d41837');
-  // }, []);
+  };
 
   const fetchPostSearch = async (searchTerm) => {
     try {
-      const response = await fetch(`http://localhost:5000/posts/search/${searchTerm}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await fetch(
+        `http://localhost:5000/posts/search/${searchTerm}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -124,7 +149,26 @@ export const PostProvider = ({ children }) => {
   };
 
   return (
-    <PostContext.Provider value={{ posts, relatedPosts, postWithId, postSearch, fetchPostSearch, fetchAllPosts, fetchRelatedPosts, fetchPostById, createPost }}>
+    <PostContext.Provider
+      value={{
+        posts,
+        setPosts,
+        relatedPosts,
+        setRelatedPosts,
+        postWithId,
+        setPostWithId,
+        postSearch,
+        setpostSearch,
+        userPosts,
+        setUserPosts,
+        fetchAllPosts,
+        fetchRelatedPosts,
+        fetchPostById,
+        fetchPostSearch,
+        createPost,
+        fetchUserPosts,
+      }}
+    >
       {children}
     </PostContext.Provider>
   );

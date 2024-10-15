@@ -16,6 +16,7 @@ const createPost = async (data) => {
     thumbnail_url,
     description,
     status,
+    owner,
   } = data;
   const newPost = new Post({
     title,
@@ -27,6 +28,7 @@ const createPost = async (data) => {
     thumbnail_url,
     description,
     status: status || "draft",
+    owner
   });
   return await newPost.save();
 };
@@ -86,11 +88,14 @@ const getByCondition = async (searchTerm) => {
       { slug: { $regex: searchTerm, $options: 'i' } }    // Case-insensitive search in slug
     ]
   };
-
   // Find posts that match the condition
   return await Post.find(condition);
 };
 
+const getUserPosts = async (email) => {
+  console.log("Getting user posts by email: ", email);
+  return await Post.find({ owner: email });
+};
 
 // Update an existing post
 const updatePost = async (id, data) => {
@@ -114,6 +119,7 @@ module.exports = {
   getPostById,
   getRelatedPosts,
   getByCondition,
+  getUserPosts,
   updatePost,
   deletePost,
 };

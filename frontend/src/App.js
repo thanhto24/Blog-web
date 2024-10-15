@@ -8,9 +8,10 @@ import PostAndImage from './components/PostAndImage';
 import PostSearchResult from './components/PostSearchResult';
 import Home from './pages/Home/Home';
 import Detail from './pages/Detail/Detail';
-import Header from './components/Header'; // Use the new combined Header
+import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/AutoScrollTop';
+import UserProfile from './pages/UserProfile/UserProfile';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
               path="/posts/search/:search"
               element={<PostSearchResult />}
             />
+            <Route path="/user-profile" element={<UserProfile />} />
             {/* Add more routes as necessary */}
           </Routes>
         </PostProvider>

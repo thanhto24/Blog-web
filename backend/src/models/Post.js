@@ -11,6 +11,7 @@ const PostSchema = new mongoose.Schema(
     author: { type: String },
     thumbnail_url: { type: String },
     description: { type: String },
+    owner: { type: String },
     status: { type: String, enum: ["draft", "published"], default: "draft" },
   },
   { timestamps: true }

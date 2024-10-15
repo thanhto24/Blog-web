@@ -19,6 +19,9 @@ router.get('/id/:id', postController.getPostById);
 // Get posts by search term
 router.get('/search/:searchTerm', postController.getPostsBySearchTerm);
 
+// Get user posts
+router.get('/your-post/:email', postController.getUserPosts);
+
 // Update a post
 router.put('/:id', postController.updatePost);
 

@@ -24,8 +24,9 @@ const PostCreate = () => {
     e.preventDefault();
     const storedUser = localStorage.getItem('user');
     const userName = storedUser ? JSON.parse(storedUser).username : '';
+    const userEmail = storedUser ? JSON.parse(storedUser).email : '';
     console.log('userName', userName);
-    const postData = { title, slug, body, tags, category, author:userName, thumbnail_url, description };
+    const postData = { title, slug, body, tags, category, author:userName, thumbnail_url, description, owner:userEmail };
 
     createPost(postData)
       .then(() => {
