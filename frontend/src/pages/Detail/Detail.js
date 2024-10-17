@@ -4,8 +4,13 @@ import ListPostRecommend from './components/ListPostRecommend';
 import PostDetail from '../../components/PostDetail';
 import { PostContext } from '../../contexts/PostContext';
 import ActionBar from '../../components/ActionBar';
+import Breadcrumb from '../../components/Breadcrumb';
 
 const Detail = () => {
+  const breadcrumbPaths = [
+    { label: 'Home', url: '/' },
+    { label: 'Detail', url: '' },
+  ];
   const { id } = useParams();
   const { postWithId, fetchPostById } = useContext(PostContext);
   window.scrollTo(0, 0);
@@ -18,6 +23,7 @@ const Detail = () => {
   console.log(relatedData);
   return (
     <div>
+      <Breadcrumb paths={breadcrumbPaths} />
       {/* <PostProvider> */}
 
       <PostDetail post={postWithId} />

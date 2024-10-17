@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.css';
 import PostCreate from './components/PostCreate';
@@ -12,28 +12,28 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/AutoScrollTop';
 import UserProfile from './pages/UserProfile/UserProfile';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
+
+
   return (
     <Router>
       <ScrollToTop />
       <div className="App">
         <Header />
         <div className="mt-[12rem]"></div>
+        
         <PostProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/create-post" element={<PostAndImage />} />
             <Route path="/posts/id/:id" element={<Detail />} />
-            <Route
-              path="/posts/search/:search"
-              element={<PostSearchResult />}
-            />
+            <Route path="/posts/search/:search" element={<PostSearchResult />} />
             <Route path="/user-profile" element={<UserProfile />} />
             {/* Add more routes as necessary */}
           </Routes>
         </PostProvider>
+        
         <Footer />
       </div>
     </Router>

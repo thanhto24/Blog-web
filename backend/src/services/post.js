@@ -35,7 +35,7 @@ const createPost = async (data) => {
 
 // Fetch all posts
 const getAllPosts = async () => {
-  console.log("Getting all posts");
+  // console.log("Getting all posts");
   return await Post.find().sort({ createdAt: -1 }); // Sort by createdAt in descending order
 };
 
