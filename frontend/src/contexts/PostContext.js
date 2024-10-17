@@ -10,6 +10,7 @@ export const PostProvider = ({ children }) => {
   const [postSearch, setpostSearch] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [userLikedPosts, setUserLikedPosts] = useState([]);
+  const [needFetch, setNeedFetch] = useState(true); // State to control data fetching
 
   const storedUser = localStorage.getItem('user');
   const userEmail = storedUser ? JSON.parse(storedUser).email : '';
@@ -52,12 +53,10 @@ export const PostProvider = ({ children }) => {
 
   const fetchRelatedPosts = async (relatedData) => {
     try {
-      // Ensure relatedData is an array before joining
       if (!Array.isArray(relatedData)) {
         throw new Error('relatedData must be an array');
       }
 
-      // Convert relatedData array to a comma-separated string for the query
       const query = relatedData.join(',');
 
       const response = await fetch(
@@ -74,19 +73,17 @@ export const PostProvider = ({ children }) => {
 
       const data = await response.json();
 
-      // Ensure data is in the expected format before updating state
       if (Array.isArray(data)) {
-        setRelatedPosts(data); // Store related posts separately
+        setRelatedPosts(data);
       } else {
         throw new Error('Unexpected response format: expected an array');
       }
     } catch (error) {
       console.error('Failed to fetch related posts:', error);
-      // Optionally handle error state here, e.g., set an error message in state
     }
   };
 
-  const fetchPostById = async function (id) {
+  const fetchPostById = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/posts/id/${id}`, {
         method: 'GET',
@@ -158,16 +155,20 @@ export const PostProvider = ({ children }) => {
 
       const newPost = await response.json();
       setPosts((prevPosts) => [...prevPosts, newPost]);
+      setNeedFetch(true); // Set needFetch to true to refresh posts
     } catch (error) {
       console.error('Error creating post:', error);
     }
   };
 
   useEffect(() => {
-    fetchAllPosts();
-    fetchUserPosts();
-    fetchUserLikedPosts();
-  }, []);
+    if (needFetch) {
+      fetchAllPosts();
+      fetchUserPosts();
+      fetchUserLikedPosts();
+    }
+    setNeedFetch(false); // Reset needFetch after fetching data
+  }, [needFetch]); // Re-fetch data when needFetch changes
 
   return (
     <PostContext.Provider
@@ -191,6 +192,7 @@ export const PostProvider = ({ children }) => {
         fetchUserPosts,
         fetchUserLikedPosts,
         createPost,
+        setNeedFetch, // Expose setNeedFetch to components if needed
       }}
     >
       {children}

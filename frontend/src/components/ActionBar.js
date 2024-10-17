@@ -1,11 +1,14 @@
 // ActionBar.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { showPopup } from './Popup';
 import ReportModal from './ReportModal';
+import { PostContext } from '../contexts/PostContext';
 
 const ActionBar = ({ postId }) => {
   const [liked, setLiked] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+
+  const {setNeedFetch} = useContext(PostContext);
 
   const storedUser = localStorage.getItem('user');
   const email = storedUser ? JSON.parse(storedUser).email : '';
@@ -42,6 +45,7 @@ const ActionBar = ({ postId }) => {
       if (!response.ok)
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       setLiked(true);
+      setNeedFetch(true);
     } catch (error) {
       console.error('Failed to like post:', error);
     }
@@ -59,6 +63,7 @@ const ActionBar = ({ postId }) => {
       if (!response.ok)
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       setLiked(false);
+      setNeedFetch(true);
     } catch (error) {
       console.error('Failed to unlike post:', error);
     }

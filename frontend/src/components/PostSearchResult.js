@@ -9,6 +9,7 @@ const PostSearchResult = () => {
     { label: 'Home', url: '/' },
     { label: 'Results', url: '' }, // Example path
   ];
+  
   const { search } = useParams();
   const {
     fetchAllPosts,
@@ -20,24 +21,30 @@ const PostSearchResult = () => {
     userPosts,
     userLikedPosts,
   } = useContext(PostContext);
+  
   const [safePostList, setSafePostList] = useState([]);
 
   useEffect(() => {
-    // console.log('Fetching posts based on search term:', search);
-    if (search === 'khac') {
-      fetchAllPosts();
-      setSafePostList(posts);
-    } else if (search === 'your-post') {
-      fetchUserPosts();
-      setSafePostList(userPosts);
-    } else if (search === 'liked-posts') {
-      fetchUserLikedPosts();
-      setSafePostList(userLikedPosts);
-    } else {
-      fetchPostSearch(search);
-      setSafePostList(postSearch);
-    }
-  }, [search, posts, userPosts, userLikedPosts, postSearch]); // Add these dependencies
+    const fetchPosts = async () => {
+      console.log('Fetching posts based on search term:', search);
+
+      if (search === 'khac') {
+        console.log('Fetching all posts');
+        // Ensure posts are loaded before setting
+        setSafePostList(posts.length ? posts : await fetchAllPosts());
+      } else if (search === 'your-post') {
+        setSafePostList(userPosts.length ? userPosts : await fetchUserPosts());
+      } else if (search === 'liked-posts') {
+        setSafePostList(userLikedPosts.length ? userLikedPosts : await fetchUserLikedPosts());
+      } else {
+        setSafePostList(postSearch.length ? postSearch : await fetchPostSearch(search));
+      }
+    };
+
+    fetchPosts(); // Call the asynchronous function
+
+    return () => {};
+  }, [search, posts, userPosts, userLikedPosts, postSearch]);
 
   return (
     <div>
@@ -72,4 +79,4 @@ const PostSearchResult = () => {
   );
 };
 
-export default PostSearchResult;
+export default React.memo(PostSearchResult);
