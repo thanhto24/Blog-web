@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ShortPost = ({ post, editMode = false }) => {
-  const storedUser = localStorage.getItem('user');
-  const email = storedUser ? JSON.parse(storedUser).email : '';
+  // const storedUser = localStorage.getItem('user');
+  // const email = storedUser ? JSON.parse(storedUser).email : '';
   
-  const trimmedEmail = email.trim().toLowerCase();
-  const trimmedOwner = post.owner?.trim().toLowerCase();
+  // const trimmedEmail = email.trim().toLowerCase();
+  // const trimmedOwner = post.owner?.trim().toLowerCase();
 
 
-  const editable = storedUser && trimmedEmail === trimmedOwner;
+  // const editable = storedUser && trimmedEmail === trimmedOwner;
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const ShortPost = ({ post, editMode = false }) => {
         )}
       </Link>
 
-      {editMode && editable && (
+      {editMode && (
         <div className="absolute top-2 right-2 flex space-x-2">
           <button
             onClick={handleEdit}

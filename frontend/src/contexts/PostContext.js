@@ -9,6 +9,7 @@ export const PostProvider = ({ children }) => {
   const [postWithId, setPostWithId] = useState([]);
   const [postSearch, setpostSearch] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [userLikedPosts, setUserLikedPosts] = useState([]);
 
   const storedUser = localStorage.getItem('user');
   const userEmail = storedUser ? JSON.parse(storedUser).email : '';
@@ -48,11 +49,6 @@ export const PostProvider = ({ children }) => {
       console.error('Failed to fetch posts:', error);
     }
   };
-
-  useEffect(() => {
-    fetchAllPosts();
-    fetchUserPosts();
-  }, []);
 
   const fetchRelatedPosts = async (relatedData) => {
     try {
@@ -129,6 +125,25 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const fetchUserLikedPosts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/users/liked-posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setUserLikedPosts(data);
+    } catch (error) {
+      console.error('Failed to fetch user liked posts:', error);
+    }
+  };
+
   const createPost = async (postData) => {
     try {
       const response = await fetch('http://localhost:5000/posts', {
@@ -148,6 +163,12 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchAllPosts();
+    fetchUserPosts();
+    fetchUserLikedPosts();
+  }, []);
+
   return (
     <PostContext.Provider
       value={{
@@ -161,12 +182,15 @@ export const PostProvider = ({ children }) => {
         setpostSearch,
         userPosts,
         setUserPosts,
+        userLikedPosts,
+        setUserLikedPosts,
         fetchAllPosts,
         fetchRelatedPosts,
         fetchPostById,
         fetchPostSearch,
-        createPost,
         fetchUserPosts,
+        fetchUserLikedPosts,
+        createPost,
       }}
     >
       {children}

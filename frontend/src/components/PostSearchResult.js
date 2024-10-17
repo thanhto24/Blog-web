@@ -9,25 +9,30 @@ const PostSearchResult = () => {
     fetchAllPosts,
     fetchPostSearch,
     fetchUserPosts,
+    fetchUserLikedPosts,
     posts,
     postSearch,
     userPosts,
+    userLikedPosts,
   } = useContext(PostContext);
   const [safePostList, setSafePostList] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching posts based on search term:', search);
+    // console.log('Fetching posts based on search term:', search);
     if (search === 'khac') {
       fetchAllPosts();
       setSafePostList(posts);
     } else if (search === 'your-post') {
       fetchUserPosts();
       setSafePostList(userPosts);
+    } else if (search === 'liked-posts') {
+      fetchUserLikedPosts();
+      setSafePostList(userLikedPosts);
     } else {
       fetchPostSearch(search);
       setSafePostList(postSearch);
     }
-  }, [search]);
+  }, [search, posts, userPosts, userLikedPosts, postSearch]); // Add these dependencies
 
   return (
     <div className="mx-auto mt-10 min-h-screen min-w-max max-w-4xl rounded-lg bg-gray-100 p-4 shadow-md">
@@ -42,7 +47,7 @@ const PostSearchResult = () => {
                 key={post._id}
                 className="transform-origin-center mx-auto h-full min-h-[150px] w-96 transform rounded-lg border border-gray-300 bg-white p-3 px-2 transition-transform hover:scale-105 hover:shadow-lg"
               >
-                <ShortPost post={post} editMode={search==='your-post'}/>
+                <ShortPost post={post} editMode={search === 'your-post'} />
               </div>
             ))}
           </div>

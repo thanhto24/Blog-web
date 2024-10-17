@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Post = require("../models/Post");
 
 const likePost = (email, postId) => {
   // Find the user by email and update the likedPosts array
@@ -29,8 +30,21 @@ const unlikePost = (email, postId) => {
   );
 };
 
+const getAllLikedPosts = async (email) => {
+  const user = await User.findOne({ email }).populate("likedPosts"); // Populate likedPosts with full post documents
+  
+  if (user) {
+    findPosts = await Post.find({ _id: { $in: user.likedPosts } }); // Find all liked posts
+    return findPosts; // Return the liked posts
+  }
+
+  return []; // Return an empty array if no user is found or no liked posts
+};
+
+
 module.exports = {
   likePost,
   checkLiked,
   unlikePost,
+  getAllLikedPosts,
 };

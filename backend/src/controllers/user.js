@@ -53,8 +53,26 @@ const unlikePost = async (req, res) => {
   }
 };
 
+const getAllLikedPosts = (req, res) => {
+  const { email } = req.body;
+  console.log("Get all liked posts for:", email);
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
+  try {
+    userService.getAllLikedPosts(email).then((user) => {
+      res.json(user);
+    });
+  } catch (error) {
+    console.error("Error fetching liked posts:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 module.exports = {
   likePost,
   checkLiked,
   unlikePost,
+  getAllLikedPosts,
 };
