@@ -120,7 +120,7 @@ const ActionBar = ({ postId }) => {
   };
 
   return (
-    <div className="mx-auto mb-20 flex max-w-3xl justify-around rounded-lg bg-gray-100 py-4">
+    <div className="mx-auto mb-32 flex max-w-3xl justify-around rounded-lg bg-gray-100 py-4">
       {/* Like Button */}
       <button
         onClick={liked ? fetchUnlikeAction : fetchLikeAction}

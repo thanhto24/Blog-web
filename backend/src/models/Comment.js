@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema(
   {
+    comment_ava_url: {type: String, required: false},
     comment_text: { type: String, required: true },
     comment_owner: { type: String, required: true },
     comment_post: { type: String, required: true },
