@@ -9,13 +9,15 @@ const imageRoutes = require('./image');
 const authRoutes = require('./auth');
 const userRoutes = require('./user');
 const emailRoutes = require('./email');
-
+const commentRoutes = require('./comment');
 // Manually add each set of routes
 router.use('/posts', postRoutes);
 router.use('/images', imageRoutes);
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/email', emailRoutes);
+router.use('/comments', commentRoutes);
+
 
 //Add middle where here like this
 // router.use('/posts', MiddlewareFunction[SchemaOfPost], postRoutes);

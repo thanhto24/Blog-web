@@ -1,10 +1,11 @@
-import React, {useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ListPostRecommend from './components/ListPostRecommend';
 import PostDetail from '../../components/PostDetail';
 import { PostContext } from '../../contexts/PostContext';
 import ActionBar from '../../components/ActionBar';
 import Breadcrumb from '../../components/Breadcrumb';
+import CommentList from './components/CommentList';
 
 const Detail = () => {
   const breadcrumbPaths = [
@@ -20,16 +21,18 @@ const Detail = () => {
   }, [id]);
 
   let relatedData = postWithId.tags;
-  console.log(relatedData);
-  return (
-    <div>
-      <Breadcrumb paths={breadcrumbPaths} />
-      {/* <PostProvider> */}
 
+  return (
+    <div className="container mx-auto p-4">
+      <Breadcrumb paths={breadcrumbPaths} />
       <PostDetail post={postWithId} />
-      <ActionBar postId={id}/>
-      <ListPostRecommend relatedData={relatedData} currentPost={postWithId}/>
-      {/* </PostProvider> */}
+      
+      {/* Comment Section */}
+      <div className="comment-section mt-10 mb-10">
+        <CommentList postId={id}/>
+      </div>
+      <ActionBar postId={id} />
+      <ListPostRecommend relatedData={relatedData} currentPost={postWithId} />
     </div>
   );
 };

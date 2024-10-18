@@ -1,6 +1,5 @@
-// ActionBar.js
 import React, { useState, useEffect, useContext } from 'react';
-import { showPopup } from './Popup';
+import { showPopup } from './Popup'; // Assuming showPopup is a notification function
 import ReportModal from './ReportModal';
 import { PostContext } from '../contexts/PostContext';
 
@@ -8,7 +7,7 @@ const ActionBar = ({ postId }) => {
   const [liked, setLiked] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
 
-  const {setNeedFetch} = useContext(PostContext);
+  const { setNeedFetch } = useContext(PostContext);
 
   const storedUser = localStorage.getItem('user');
   const email = storedUser ? JSON.parse(storedUser).email : '';
@@ -23,8 +22,7 @@ const ActionBar = ({ postId }) => {
         },
         body: JSON.stringify({ email: email, postId: postId }),
       });
-      if (!response.ok)
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
       const data = await response.json();
       setLiked(data.liked);
     } catch (error) {
@@ -42,8 +40,7 @@ const ActionBar = ({ postId }) => {
         },
         body: JSON.stringify({ email: email, postId: postId }),
       });
-      if (!response.ok)
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
       setLiked(true);
       setNeedFetch(true);
     } catch (error) {
@@ -60,8 +57,7 @@ const ActionBar = ({ postId }) => {
         },
         body: JSON.stringify({ email: email, postId: postId }),
       });
-      if (!response.ok)
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
       setLiked(false);
       setNeedFetch(true);
     } catch (error) {
@@ -95,11 +91,10 @@ const ActionBar = ({ postId }) => {
           messageObj: {
             link: 'http://localhost:3000/posts/id/' + postId,
             msg: ['The post below has been reported!', `Reason: ${reason}`, 'Please check and take action!'],
-            },
+          },
         }),
       });
-      if (!response.ok)
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
       showPopup('This post has been reported successfully!', 'success');
     } catch (error) {
       console.error('Failed to report post:', error);
@@ -110,6 +105,18 @@ const ActionBar = ({ postId }) => {
     fetchSendEmail(reason);
     console.log(`Report reason: ${reason}`);
     showPopup('This post has been reported successfully!', 'success');
+  };
+
+  const handleShare = () => {
+    const postUrl = `${window.location.origin}/posts/id/${postId}`;
+    navigator.clipboard.writeText(postUrl)
+      .then(() => {
+        showPopup('Post URL copied to clipboard!', 'success');
+      })
+      .catch((error) => {
+        console.error('Failed to copy URL:', error);
+        showPopup('Failed to copy URL', 'error');
+      });
   };
 
   return (
@@ -125,12 +132,13 @@ const ActionBar = ({ postId }) => {
         <span>{liked ? 'Liked' : 'Like'}</span>
       </button>
 
-      {/* Comment Button */}
-      <button className="flex items-center space-x-1 text-gray-700 hover:text-green-500">
-        <span role="img" aria-label="comment">
-          💬
-        </span>
-        <span>Comment</span>
+      {/* Share Button */}
+      <button 
+        className="flex items-center space-x-1 text-gray-700 hover:text-green-500"
+        onClick={handleShare}
+      >
+        <span role="img" aria-label="Share">🔗</span>
+        <span>Share</span>
       </button>
 
       {/* Report Button */}
@@ -138,9 +146,7 @@ const ActionBar = ({ postId }) => {
         className="flex items-center space-x-1 text-gray-700 hover:text-red-500"
         onClick={handleOpenReportModal}
       >
-        <span role="img" aria-label="report">
-          ⚠️
-        </span>
+        <span role="img" aria-label="report">⚠️</span>
         <span>Report</span>
       </button>
 
