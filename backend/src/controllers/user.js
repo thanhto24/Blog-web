@@ -69,10 +69,74 @@ const getAllLikedPosts = (req, res) => {
   }
 };
 
+const followUser = async (req, res) => {
+  const { email, followEmail } = req.body;
+  if (!email || !followEmail) {
+    return res.status(400).json({ error: "Email and followEmail are required" });
+  }
+
+  try {
+    const user = await userService.followUser(email, followEmail);
+    res.json(user);
+  } catch (error) {
+    console.error("Error following user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const unfollowUser = async (req, res) => {
+  const { email, followEmail } = req.body;
+  if (!email || !followEmail) {
+    return res.status(400).json({ error: "Email and followEmail are required" });
+  }
+
+  try {
+    const user = await userService.unfollowUser(email, followEmail);
+    res.json(user);
+  } catch (error) {
+    console.error("Error unfollowing user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+const getAllFollowing = async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
+
+  try {
+    const user = await userService.getAllFollowing(email);
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching following users:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+const checkFollowed = async(req, res) => {
+  const { email, followEmail } = req.body;
+  if (!email || !followEmail) {
+    return res.status(400).json({ error: "Email and followEmail are required" });
+  }
+
+  try {
+    const isFollowed = await userService.checkFollowed(email, followEmail);
+    res.json({ followed: isFollowed });
+  } catch (error) {
+    console.error("Error checking follow status:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 
 module.exports = {
   likePost,
   checkLiked,
   unlikePost,
   getAllLikedPosts,
+  followUser,
+  unfollowUser,
+  getAllFollowing,
+  checkFollowed,
 };

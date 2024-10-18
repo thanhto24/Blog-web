@@ -41,10 +41,51 @@ const getAllLikedPosts = async (email) => {
   return []; // Return an empty array if no user is found or no liked posts
 };
 
+const followUser = (email, followEmail) => {
+  // Find the user by email and update the following array
+  return User.findOneAndUpdate(
+    { email: email }, // Find by email
+    { $addToSet: { following: followEmail } }, // Use $addToSet to avoid duplicates
+    { new: true, upsert: true } // Corrected typo: 'upsert'
+  );
+};
 
-module.exports = {
+const unfollowUser = (email, followEmail) => {
+  // Find the user by email and update the following array
+  return User.findOneAndUpdate(
+    { email: email }, // Find by email
+    { $pull: { following: followEmail } }, // Use $pull to remove followEmail
+    { new: true, upsert: true } // Corrected typo: 'upsert'
+  );
+};
+
+const getAllFollowing = async (email) => {
+  const user = await User.findOne({ email }).populate("following"); // Populate following with full user documents
+  
+  if (user) {
+    findUsers = await User.find({ _id: { $in: user.following } }); // Find all followed users
+    return findUsers; // Return the followed users
+  }
+
+  return []; // Return an empty array if no user is found or no followed users
+};
+
+const checkFollowed = async (email, followEmail) => {
+  // Find the user and check if followEmail is in the following array
+  const user = await User.findOne({email});
+  if (user && user.following.includes(followEmail)) {
+    return true; // User is followed
+  }
+  return false; // User is not followed
+};
+
+module.exports = { 
   likePost,
   checkLiked,
   unlikePost,
   getAllLikedPosts,
+  followUser,
+  unfollowUser,
+  getAllFollowing,
+  checkFollowed
 };

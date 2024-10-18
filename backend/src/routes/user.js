@@ -8,4 +8,10 @@ router.post('/check-like', userController.checkLiked);
 router.patch('/unlike', userController.unlikePost);
 router.post('/liked-posts', userController.getAllLikedPosts);
 
+// Follow a user
+router.post('/follow', userController.followUser);
+router.patch('/unfollow', userController.unfollowUser);
+router.post('/following', userController.getAllFollowing);
+router.post('/check-follow', userController.checkFollowed);
+
 module.exports = router;
