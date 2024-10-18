@@ -61,10 +61,11 @@ const unfollowUser = (email, followEmail) => {
 
 const getAllFollowing = async (email) => {
   const user = await User.findOne({ email }).populate("following"); // Populate following with full user documents
-  
+  // console.log(user);
   if (user) {
-    findUsers = await User.find({ _id: { $in: user.following } }); // Find all followed users
-    return findUsers; // Return the followed users
+    // findUsers = await User.find({ email: { $in: user.following } }); 
+    // return findUsers; 
+    return user.following;
   }
 
   return []; // Return an empty array if no user is found or no followed users

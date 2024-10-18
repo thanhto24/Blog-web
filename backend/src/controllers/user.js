@@ -107,6 +107,7 @@ const getAllFollowing = async (req, res) => {
 
   try {
     const user = await userService.getAllFollowing(email);
+    console.log("Find users controller: ", user);
     res.json(user);
   } catch (error) {
     console.error("Error fetching following users:", error);

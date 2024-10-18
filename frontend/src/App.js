@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/AutoScrollTop';
 import UserProfile from './pages/UserProfile/UserProfile';
+import ListFollowing from './pages/UserProfile/components/ListFollowing';
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/posts/id/:id" element={<Detail />} />
             <Route path="/posts/search/:search" element={<PostSearchResult />} />
             <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/user/follow/all" element={<ListFollowing />} />
             {/* Add more routes as necessary */}
           </Routes>
         </PostProvider>

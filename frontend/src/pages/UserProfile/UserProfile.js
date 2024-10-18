@@ -19,7 +19,7 @@ const UserProfile = () => {
           View Post you like
         </Link>
         <Link
-          to={`/posts/search/following-authors`} // Change this to the appropriate path
+          to={`/user/follow/all`} // Change this to the appropriate path
           className="rounded-md bg-red-700 px-4 py-2 text-white text-center transition duration-200 hover:bg-blue-800"
         >
           View following authors
