@@ -18,7 +18,7 @@ Blog của tôi được xây dựng trên nền tảng:
 - **[Node.js](https://nodejs.org)**: Để phát triển backend.
 - **[Express](https://expressjs.com)**: Để quản lý các route và middleware.
 - **[MongoDB](https://www.mongodb.com)**: Để lưu trữ dữ liệu bài viết.
-- **[React](https://reactjs.org)**: Để xây dựng giao diện người dùng (nếu có).
+- **[React](https://reactjs.org)**: Để xây dựng giao diện người dùng.
 - **[Tailwind CSS](https://tailwindcss.com)**: Để tạo kiểu cho giao diện blog một cách nhanh chóng và dễ dàng.
 
 ---
