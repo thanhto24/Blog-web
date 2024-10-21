@@ -25,22 +25,16 @@ const UserProfile = () => {
           View following authors
         </Link>
         <Link
-          to={`/posts/search/your-comments`} // Change this to the appropriate path
-          className="rounded-md bg-red-700 px-4 py-2 text-white text-center transition duration-200 hover:bg-blue-800"
-        >
-          View your comments
-        </Link>
-        <Link
-          to={`/other1`} // Change this to the appropriate path
+          to={`/`} // Change this to the appropriate path
           className="rounded-md bg-gray-700 px-4 py-2 text-white text-center transition duration-200 hover:bg-gray-800"
         >
-          Other1
+          Incoming Feature
         </Link>
         <Link
-          to={`/other2`} // Change this to the appropriate path
+          to={`/`} // Change this to the appropriate path
           className="rounded-md bg-gray-700 px-4 py-2 text-white text-center transition duration-200 hover:bg-gray-800"
         >
-          Other2
+          Incoming Feature
         </Link>
       </div>
     </div>

@@ -14,7 +14,7 @@ const Detail = () => {
   ];
   const { id } = useParams();
   const { postWithId, fetchPostById } = useContext(PostContext);
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
 
   useEffect(() => {
     fetchPostById(id);
@@ -23,17 +23,19 @@ const Detail = () => {
   let relatedData = postWithId.tags;
 
   return (
-    <div className="container mx-auto p-4">
+    <>
       <Breadcrumb paths={breadcrumbPaths} />
-      <PostDetail post={postWithId} />
-      
-      {/* Comment Section */}
-      <div className="comment-section mt-10 mb-10">
-        <CommentList postId={id}/>
+      <div className="container mx-auto p-4">
+        <PostDetail post={postWithId} />
+
+        {/* Comment Section */}
+        <div className="comment-section mb-10 mt-10">
+          <CommentList postId={id} />
+        </div>
+        <ActionBar postId={id} />
+        <ListPostRecommend relatedData={relatedData} currentPost={postWithId} />
       </div>
-      <ActionBar postId={id} />
-      <ListPostRecommend relatedData={relatedData} currentPost={postWithId} />
-    </div>
+    </>
   );
 };
 

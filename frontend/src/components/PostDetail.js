@@ -17,7 +17,7 @@ const PostDetail = ({ post }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email: email, followEmail: post.author }),
+          body: JSON.stringify({ email: email, followEmail: post.owner }),
         });
         if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
         const data = await response.json();
@@ -27,7 +27,7 @@ const PostDetail = ({ post }) => {
       }
     };
     fetchFollowStatus();
-  }, [post, post.author]);
+  }, [post, post.owner]);
 
   const handleFollow= async () => {
     try {
@@ -36,7 +36,7 @@ const PostDetail = ({ post }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email, followEmail: post.author }),
+        body: JSON.stringify({ email: email, followEmail: post.owner }),
       });
       if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
       setIsFollowing(!isFollowing);
@@ -52,7 +52,7 @@ const PostDetail = ({ post }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email, followEmail: post.author }),
+        body: JSON.stringify({ email: email, followEmail: post.owner }),
       });
       if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
       setIsFollowing(!isFollowing);

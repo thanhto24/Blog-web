@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Noto Sans', sans-serif;
     line-height: 1.6;
     background-color: #f4e6e6;
-    height: 100vh;
+    height: 100%;
 }
 
 .App {
-    height: 100vh;
+    height: calc(100vh);
 }
 
 .marquee-container {

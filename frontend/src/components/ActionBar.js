@@ -13,7 +13,7 @@ const ActionBar = ({ postId }) => {
   const email = storedUser ? JSON.parse(storedUser).email : '';
 
   // Function to check if the post is already liked
-  const fetchCheckLike = async () => {
+  const fetchCheckLike = async (e) => {
     try {
       const response = await fetch('http://localhost:5000/users/check-like', {
         method: 'POST',
@@ -31,7 +31,8 @@ const ActionBar = ({ postId }) => {
   };
 
   // Function to toggle the like action
-  const fetchLikeAction = async () => {
+  const fetchLikeAction = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch('http://localhost:5000/users/like', {
         method: 'POST',
@@ -48,7 +49,8 @@ const ActionBar = ({ postId }) => {
     }
   };
 
-  const fetchUnlikeAction = async () => {
+  const fetchUnlikeAction = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch('http://localhost:5000/users/unlike', {
         method: 'PATCH',

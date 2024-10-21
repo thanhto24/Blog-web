@@ -15,27 +15,24 @@ import UserProfile from './pages/UserProfile/UserProfile';
 import ListFollowing from './pages/UserProfile/components/ListFollowing';
 
 const App = () => {
-
-
   return (
     <Router>
       <ScrollToTop />
-      <div className="App">
+      <div className="App flex flex-col min-h-screen"> {/* Sử dụng flexbox với chiều cao tối thiểu */}
         <Header />
-        <div className="mt-[12rem]"></div>
-        
-        <PostProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create-post" element={<PostAndImage />} />
-            <Route path="/posts/id/:id" element={<Detail />} />
-            <Route path="/posts/search/:search" element={<PostSearchResult />} />
-            <Route path="/user-profile" element={<UserProfile />} />
-            <Route path="/user/follow/all" element={<ListFollowing />} />
-            {/* Add more routes as necessary */}
-          </Routes>
-        </PostProvider>
-        
+        <div className="mt-[12rem] flex-grow"> {/* Flex-grow để nội dung mở rộng */}
+          <PostProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create-post" element={<PostAndImage />} />
+              <Route path="/posts/id/:id" element={<Detail />} />
+              <Route path="/posts/search/:search" element={<PostSearchResult />} />
+              <Route path="/user-profile" element={<UserProfile />} />
+              <Route path="/user/follow/all" element={<ListFollowing />} />
+              {/* Thêm nhiều route nếu cần */}
+            </Routes>
+          </PostProvider>
+        </div>
         <Footer />
       </div>
     </Router>
