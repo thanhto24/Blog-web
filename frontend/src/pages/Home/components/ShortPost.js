@@ -1,7 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { PostContext } from '../../../contexts/PostContext';
 
 const ShortPost = ({ post, editMode = false }) => {
+  const navigate = useNavigate();
+  
   // const storedUser = localStorage.getItem('user');
   // const email = storedUser ? JSON.parse(storedUser).email : '';
   
@@ -10,14 +13,18 @@ const ShortPost = ({ post, editMode = false }) => {
 
 
   // const editable = storedUser && trimmedEmail === trimmedOwner;
+  const {deletePost} = useContext(PostContext); 
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
+    navigate("/create-post", { state: { post } }); // Pass the post data using state
     console.log('Edit post:', post._id);
   };
+  
 
   const handleDelete = (e) => {
     e.preventDefault();
+    deletePost(post._id);
     console.log('Delete post:', post._id);
   };
 

@@ -23,7 +23,7 @@ const createComment = async (data) => {
 
 // Fetch all comments for a post
 const getComments = async (postId) => {
-  return await Comment.find({ comment_post: postId }).sort({ createdAt: 1 });
+  return await Comment.find({ comment_post: postId }).sort({ updatedAt: 1 });
 };
 
 module.exports = {

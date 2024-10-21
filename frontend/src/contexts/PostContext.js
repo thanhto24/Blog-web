@@ -161,6 +161,46 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const updatePost = async (id, postData) => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error updating post');
+      }
+
+      const updatedPost = await response.json();
+      setPosts((prevPosts) =>
+        prevPosts.map((post) => (post._id === updatedPost._id ? updatedPost : post))
+      );
+      setNeedFetch(true); // Set needFetch to true to refresh posts
+    } catch (error) {
+      console.error('Error updating post:', error);
+    }
+  };
+
+  const deletePost = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error('Error deleting post');
+      }
+
+      setPosts((prevPosts) => prevPosts.filter((post) => post._id !== id));
+      setNeedFetch(true); // Set needFetch to true to refresh posts
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
+
   useEffect(() => {
     if (needFetch) {
       fetchAllPosts();
@@ -192,6 +232,8 @@ export const PostProvider = ({ children }) => {
         fetchUserPosts,
         fetchUserLikedPosts,
         createPost,
+        updatePost,
+        deletePost,
         setNeedFetch, // Expose setNeedFetch to components if needed
       }}
     >

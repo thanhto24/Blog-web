@@ -36,7 +36,7 @@ const createPost = async (data) => {
 // Fetch all posts
 const getAllPosts = async () => {
   // console.log("Getting all posts");
-  return await Post.find().sort({ createdAt: -1 }); // Sort by createdAt in descending order
+  return await Post.find().sort({ updatedAt: -1 }); // Sort by updatedAt in descending order
 };
 
 const getRelatedPosts = async (relatedData) => {
@@ -107,9 +107,8 @@ const updatePost = async (id, data) => {
 
 // Delete a post
 const deletePost = async (id) => {
-  const post = await Post.findById(id);
+  const post = await Post.findByIdAndDelete(id);
   if (!post) throw new Error("Post not found");
-  await post.remove();
   return post;
 };
 

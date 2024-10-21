@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
@@ -6,52 +6,59 @@ import 'katex/dist/katex.min.css'; // Import CSS for KaTeX
 import { PostContext } from '../contexts/PostContext';
 import TextInput from './TextInput';
 import { showPopup } from './Popup';
+import { useLocation } from 'react-router-dom'; // Import useLocation
 
 const PostCreate = () => {
+  const { state } = useLocation(); // Get state from navigation
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [tags, setTags] = useState('');
-  const [author, setAuthor] = useState('');
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
-  const [message, setMessage] = useState('');
   const [thumbnail_url, setThumbnailUrl] = useState('');
   const [description, setDescription] = useState('');
 
-  const { createPost } = useContext(PostContext); // Get createPost from context
+  const { createPost, updatePost } = useContext(PostContext); // Get createPost from context
+
+  // Populate form fields if editing an existing post
+  useEffect(() => {
+    if (state?.post) {
+      const { title, slug, tags, category, body, thumbnail_url, description } = state.post;
+      setTitle(title || '');
+      setSlug(slug || '');
+      setTags(tags || '');
+      setCategory(category || '');
+      setBody(body || '');
+      setThumbnailUrl(thumbnail_url || '');
+      setDescription(description || '');
+    }
+  }, [state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const storedUser = localStorage.getItem('user');
     const userName = storedUser ? JSON.parse(storedUser).username : '';
     const userEmail = storedUser ? JSON.parse(storedUser).email : '';
-    console.log('userName', userName);
-    const postData = { title, slug, body, tags, category, author:userName, thumbnail_url, description, owner:userEmail };
 
-    createPost(postData)
-      .then(() => {
-        showPopup('Post created successfully', 'success');
-        // Reset fields if needed
-        // setTitle('');
-        // setSlug('');
-        // setTags('');
-        // setAuthor('');
-        // setCategory('');
-        // setBody('');
-      })
-      .catch((error) => {
-        showPopup('Failed to create post.' + error, 'fail');
-      });
+    const postData = { title, slug, body, tags, category, author: userName, thumbnail_url, description, owner: userEmail };
+
+    if (state?.post) {
+      updatePost(state.post._id, postData)
+      .then(() => showPopup('Post updated successfully!', 'success'))
+      .catch((error) => showPopup('Failed to update post: ' + error.message, 'fail'));
+    } else {
+      createPost(postData)
+      .then(() => showPopup('Post created successfully!', 'success'))
+      .catch((error) => showPopup('Failed to create post: ' + error.message, 'fail'));
+    }
   };
 
   return (
     <div className="mx-auto w-full rounded-lg bg-white p-6 shadow-md">
-      {/* <h2 className="mb-4 text-2xl font-bold">Create New Post</h2> */}
-
       <MDEditor
         value={body}
         onChange={setBody}
-        height={500} // Customize height
+        height={500}
         previewOptions={{
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
@@ -116,7 +123,7 @@ const PostCreate = () => {
         onClick={handleSubmit}
         className="mx-auto mt-6 flex w-40 justify-center rounded-lg bg-blue-500 py-2 text-white transition duration-200 hover:bg-blue-600"
       >
-        Create Post
+        {state?.post ? 'Update Post' : 'Create Post'} {/* Change button text based on edit mode */}
       </button>
     </div>
   );

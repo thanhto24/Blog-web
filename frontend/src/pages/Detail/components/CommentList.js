@@ -56,7 +56,7 @@ const CommentList = ({ postId }) => {
         const data = await response.json();
         setComments((prevComments) => {
           const updatedComments = [data, ...prevComments];
-          return updatedComments.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+          return updatedComments.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
         });
         setNewComment('');
         setReplyTo(null);
@@ -112,7 +112,7 @@ const CommentList = ({ postId }) => {
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-gray-800">{comment.comment_owner}</span>
-                <span className="text-xs text-gray-500">{formatDateTime(comment.createdAt) || 'Just now'}</span>
+                <span className="text-xs text-gray-500">{formatDateTime(comment.updatedAt) || 'Just now'}</span>
               </div>
               <p className="mt-1 text-gray-700">{comment.comment_text}</p>
 

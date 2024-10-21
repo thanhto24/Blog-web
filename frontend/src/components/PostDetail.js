@@ -81,7 +81,7 @@ const PostDetail = ({ post }) => {
       {/* Flexbox container for date, author, and follow button */}
       <div className="mb-2 flex justify-between items-center text-gray-600 font-bold">
         {/* Created at (left) */}
-        <p>{formatDateTime(post.createdAt)}</p>
+        <p>{formatDateTime(post.updatedAt)}</p>
         {/* Author and Follow button (right) */}
         <div className="flex items-center">
           <p className="mr-4">Tác giả: {post.author}</p>
