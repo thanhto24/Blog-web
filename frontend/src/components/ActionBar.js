@@ -88,7 +88,7 @@ const ActionBar = ({ postId }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          to: 'thanhtovntmk@gmail.com',
+          to: email,
           subject: 'Report Post from Blog-web',
           messageObj: {
             link: 'http://localhost:3000/posts/id/' + postId,

@@ -6,8 +6,9 @@ import 'katex/dist/katex.min.css'; // Import KaTeX styles
 
 const PostDetail = ({ post }) => {
   const [isFollowing, setIsFollowing] = useState(false);
-  const email = 'tqthanh22@clc.fitus.edu.vn';
-  
+  const storedUser = localStorage.getItem('user');
+  const email = storedUser ? JSON.parse(storedUser).email : '';
+    
   useEffect(() => {
     // Fetch the follow status of the current post
     const fetchFollowStatus = async () => {

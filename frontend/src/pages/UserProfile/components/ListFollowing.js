@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const ListFollowing = () => {
-    const email = 'tqthanh22@clc.fitus.edu.vn';
-    
+    const storedUser = localStorage.getItem('user');
+    const email = storedUser ? JSON.parse(storedUser).email : '';
+        
     const [following, setFollowing] = useState([]);
     const [userToUnfollow, setUserToUnfollow] = useState(null);
     const [fadeOutUser, setFadeOutUser] = useState('');
