@@ -90,8 +90,8 @@ const Header = () => {
           {user ? (
             <>
               <span className="text-lg">Hello, {user.username}!</span>
-              <Link to="/user-profile" className="flex items-center">
-                <img
+              <Link to={`/user-profile/${user.email}`} className="flex items-center">
+              <img
                   src={user.profilePic}
                   alt={`${user.username}'s profile`}
                   className="h-10 w-10 rounded-full"

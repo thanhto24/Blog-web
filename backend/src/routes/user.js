@@ -13,5 +13,6 @@ router.post('/follow', userController.followUser);
 router.patch('/unfollow', userController.unfollowUser);
 router.post('/following', userController.getAllFollowing);
 router.post('/check-follow', userController.checkFollowed);
+router.post('/get-user', userController.getUser);
 
 module.exports = router;

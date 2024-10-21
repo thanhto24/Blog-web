@@ -80,6 +80,11 @@ const checkFollowed = async (email, followEmail) => {
   return false; // User is not followed
 };
 
+const getUser = async (email) => {
+  const user = await User.findOne({email: email});
+  return {name: user.username, pic: user.profilePicture};
+};
+
 module.exports = { 
   likePost,
   checkLiked,
@@ -88,5 +93,6 @@ module.exports = {
   followUser,
   unfollowUser,
   getAllFollowing,
-  checkFollowed
+  checkFollowed,
+  getUser
 };

@@ -27,7 +27,7 @@ const App = () => {
               <Route path="/create-post" element={<PostAndImage />} />
               <Route path="/posts/id/:id" element={<Detail />} />
               <Route path="/posts/search/:search" element={<PostSearchResult />} />
-              <Route path="/user-profile" element={<UserProfile />} />
+              <Route path="/user-profile/:email" element={<UserProfile />} />
               <Route path="/user/follow/all" element={<ListFollowing />} />
               {/* Thêm nhiều route nếu cần */}
             </Routes>

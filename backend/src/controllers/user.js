@@ -130,6 +130,20 @@ const checkFollowed = async(req, res) => {
   }
 }
 
+const getUser = async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
+
+  try {
+    const user = await userService.getUser(email);
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 module.exports = {
   likePost,
@@ -140,4 +154,5 @@ module.exports = {
   unfollowUser,
   getAllFollowing,
   checkFollowed,
+  getUser
 };

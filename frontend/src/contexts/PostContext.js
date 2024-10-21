@@ -15,9 +15,9 @@ export const PostProvider = ({ children }) => {
   const storedUser = localStorage.getItem('user');
   const userEmail = storedUser ? JSON.parse(storedUser).email : '';
 
-  const fetchUserPosts = async () => {
+  const fetchUserPosts = async (email) => {
     try {
-      const response = await fetch(`http://localhost:5000/posts/your-post/${userEmail}`, {
+      const response = await fetch(`http://localhost:5000/posts/your-post/${email||userEmail}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });

@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css'; // Import KaTeX styles
+import { Link } from 'react-router-dom';
 
 const PostDetail = ({ post }) => {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -84,7 +85,11 @@ const PostDetail = ({ post }) => {
         <p>{formatDateTime(post.updatedAt)}</p>
         {/* Author and Follow button (right) */}
         <div className="flex items-center">
-          <p className="mr-4">Tác giả: {post.author}</p>
+          <div className="mr-4">Tác giả:
+            <Link to={`/user-profile/${post.owner}`} className="ml-2 text-blue-500 hover:underline">
+              {post.author}
+            </Link>
+          </div>
           <button
             onClick={handleFollowToggle}
             className={`rounded-full px-4 py-1 font-semibold ${

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import UserAvatar from '../../../assets/userDefault.png';
 
 const CommentList = ({ postId }) => {
@@ -8,6 +9,10 @@ const CommentList = ({ postId }) => {
   const [replyOwner, setReplyOwner] = useState('');
   const [replyText, setReplyText] = useState('');
   const commentFormRef = useRef(null);
+
+  const storedUser = localStorage.getItem('user');
+  const userEmail = storedUser ? JSON.parse(storedUser).email : '';
+  const userName = storedUser ? JSON.parse(storedUser).username : '';
 
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
@@ -42,7 +47,7 @@ const CommentList = ({ postId }) => {
           },
           body: JSON.stringify({
             comment_text: newComment,
-            comment_owner: 'Ryoma',
+            comment_owner: `${userEmail}|${userName}`,
             comment_post: postId,
             comment_root: replyTo ? replyTo : null,
             comment_ava_url: 'https://scontent.fsgn5-11.fna.fbcdn.net/v/t39.30808-1/364778081_1718664741920440_1133456312821521099_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeFRBZ3UnZIJmXxs7jJolaf8EaQhjPySYp4RpCGM_JJinodE2SNeggO33NPmHy_CD3E-QclVZI_HYX71XQWkDB_q&_nc_ohc=600LJC4WlawQ7kNvgHnULXd&_nc_zt=24&_nc_ht=scontent.fsgn5-11.fna&_nc_gid=AdmxlNwO29OTUdeY57hjXi8&oh=00_AYDnz6hMb9QPKieW0wZ10-pW5AHU0MQKOISJFX1-7ngU0g&oe=671837F7',
@@ -111,7 +116,7 @@ const CommentList = ({ postId }) => {
             />
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-gray-800">{comment.comment_owner}</span>
+                <Link to={`/user-profile/${comment.comment_owner.split('|')[0]}`} className="font-semibold text-gray-800">{comment.comment_owner.split('|')[1]}</Link>
                 <span className="text-xs text-gray-500">{formatDateTime(comment.updatedAt) || 'Just now'}</span>
               </div>
               <p className="mt-1 text-gray-700">{comment.comment_text}</p>
