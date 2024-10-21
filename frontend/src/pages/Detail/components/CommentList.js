@@ -13,6 +13,7 @@ const CommentList = ({ postId }) => {
   const storedUser = localStorage.getItem('user');
   const userEmail = storedUser ? JSON.parse(storedUser).email : '';
   const userName = storedUser ? JSON.parse(storedUser).username : '';
+  const profilePic = storedUser ? JSON.parse(storedUser).profilePic : '';
 
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
@@ -50,7 +51,7 @@ const CommentList = ({ postId }) => {
             comment_owner: `${userEmail}|${userName}`,
             comment_post: postId,
             comment_root: replyTo ? replyTo : null,
-            comment_ava_url: 'https://scontent.fsgn5-11.fna.fbcdn.net/v/t39.30808-1/364778081_1718664741920440_1133456312821521099_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeFRBZ3UnZIJmXxs7jJolaf8EaQhjPySYp4RpCGM_JJinodE2SNeggO33NPmHy_CD3E-QclVZI_HYX71XQWkDB_q&_nc_ohc=600LJC4WlawQ7kNvgHnULXd&_nc_zt=24&_nc_ht=scontent.fsgn5-11.fna&_nc_gid=AdmxlNwO29OTUdeY57hjXi8&oh=00_AYDnz6hMb9QPKieW0wZ10-pW5AHU0MQKOISJFX1-7ngU0g&oe=671837F7',
+            comment_ava_url: profilePic,
           }),
         });
 
@@ -123,7 +124,7 @@ const CommentList = ({ postId }) => {
 
               {comment.comment_root !== null && (
                 <div className="text-sm italic text-gray-400">
-                  Replied to {comment.comment_owner}:
+                  Replied to {comment.comment_owner.split('|')[1]}:
                   <span className="ml-1">
                     "
                     {comments
@@ -168,7 +169,7 @@ const CommentList = ({ postId }) => {
         {replyTo && (
           <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg flex justify-between items-center">
             <div>
-              You're replying to <span className="font-semibold">{replyOwner}</span>:
+              You're replying to <span className="font-semibold">{replyOwner.split('|')[1]}</span>:
               <span className="ml-2 text-sm italic text-gray-600">
                 "{replyText.slice(0, 20) + (replyText.length > 20 ? '...' : '')}"
               </span>

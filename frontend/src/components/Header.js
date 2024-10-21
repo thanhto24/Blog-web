@@ -107,7 +107,7 @@ const Header = () => {
           ) : (
             <button
               onClick={handleGoogleLogin}
-              className="flex w-32 items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-white transition duration-200 hover:bg-blue-600"
+              className="flex w-44 items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-white transition duration-200 hover:bg-blue-600"
             >
               Login with Google
             </button>

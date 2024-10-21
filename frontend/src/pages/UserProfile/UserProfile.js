@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import UserSetting from './components/UserSetting';
 import { PostContext } from '../../contexts/PostContext';
+import ShortPost from '../Home/components/ShortPost';
 
 const UserProfile = () => {
   const { email } = useParams();
@@ -149,14 +150,7 @@ const UserProfile = () => {
       <h3 className="mb-6 text-2xl font-semibold text-gray-800">Post of {name} </h3>
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
         {userPosts.map((post) => (
-          <Link
-            to={`/posts/id/${post._id}`}
-            key={post._id}
-            className="rounded-lg bg-white p-5 shadow-md transition-transform duration-200 hover:scale-105 hover:shadow-lg"
-          >
-            <h3 className="text-xl font-bold text-gray-800">{post.title}</h3>
-            <p className="mt-2 text-gray-600">{post.content}</p>
-          </Link>
+          <ShortPost key={post._id} post={post} />
         ))}
       </div>
     </div>

@@ -3,25 +3,30 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css'; // Import KaTeX styles
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const PostDetail = ({ post }) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const storedUser = localStorage.getItem('user');
   const email = storedUser ? JSON.parse(storedUser).email : '';
-    
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Fetch the follow status of the current post
     const fetchFollowStatus = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users/check-follow', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email: email, followEmail: post.owner }),
-        });
-        if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
+        const response = await fetch(
+          'http://localhost:5000/users/check-follow',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, followEmail: post.owner }),
+          }
+        );
+        if (!response.ok)
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
         const data = await response.json();
         setIsFollowing(data.followed);
       } catch (error) {
@@ -31,7 +36,7 @@ const PostDetail = ({ post }) => {
     fetchFollowStatus();
   }, [post, post.owner]);
 
-  const handleFollow= async () => {
+  const handleFollow = async () => {
     try {
       const response = await fetch('http://localhost:5000/users/follow', {
         method: 'POST',
@@ -40,7 +45,8 @@ const PostDetail = ({ post }) => {
         },
         body: JSON.stringify({ email: email, followEmail: post.owner }),
       });
-      if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
+      if (!response.ok)
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
       setIsFollowing(!isFollowing);
     } catch (error) {
       console.error('Failed to follow user:', error);
@@ -56,7 +62,8 @@ const PostDetail = ({ post }) => {
         },
         body: JSON.stringify({ email: email, followEmail: post.owner }),
       });
-      if (!response.ok) throw new Error(`Error: ${response.status} ${response.statusText}`);
+      if (!response.ok)
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
       setIsFollowing(!isFollowing);
     } catch (error) {
       console.error('Failed to unfollow user:', error);
@@ -80,24 +87,37 @@ const PostDetail = ({ post }) => {
     <div className="mx-auto max-w-6xl p-4">
       <h1 className="mb-6 text-center text-3xl font-bold">{post.title}</h1>
       {/* Flexbox container for date, author, and follow button */}
-      <div className="mb-2 flex justify-between items-center text-gray-600 font-bold">
+      <div className="mb-2 flex items-center justify-between font-bold text-gray-600">
         {/* Created at (left) */}
         <p>{formatDateTime(post.updatedAt)}</p>
         {/* Author and Follow button (right) */}
         <div className="flex items-center">
-          <div className="mr-4">Tác giả:
-            <Link to={`/user-profile/${post.owner}`} className="ml-2 text-blue-500 hover:underline">
+          <div className="mr-4">
+            Tác giả:
+            <Link
+              to={`/user-profile/${post.owner}`}
+              className="ml-2 text-blue-500 hover:underline"
+            >
               {post.author}
             </Link>
+            {post.owner === email && ' (You)'}
           </div>
-          <button
-            onClick={handleFollowToggle}
-            className={`rounded-full px-4 py-1 font-semibold ${
-              isFollowing ? 'bg-red-500 text-white' : 'bg-blue-500 text-white'
-            } hover:opacity-90`}
-          >
-            {isFollowing ? 'Unfollow' : 'Follow'}
-          </button>
+          {post.owner !== email && (
+            <button
+              onClick={handleFollowToggle}
+              className={`rounded-md border border-gray-500 px-4 py-1 ${isFollowing ? 'bg-gray-500 text-white' : ''}`}
+            >
+              {isFollowing ? 'Unfollow' : 'Follow'}
+            </button>
+          )}
+          {post.owner === email && (
+            <button
+              onClick={() => navigate('/create-post', { state: { post } })}
+              className="ml-4 rounded-md border border-gray-500 px-4 py-1 bg-slate-800 text-white"
+            >
+              Edit
+            </button>
+          )}
         </div>
       </div>
       <div className="whitespace-pre-wrap rounded bg-gray-100 p-10">
