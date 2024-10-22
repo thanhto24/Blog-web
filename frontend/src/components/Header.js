@@ -83,7 +83,7 @@ const Header = () => {
       {/* Ensuring header stays at the top */}
       <header className="flex items-center justify-between bg-white p-5 shadow-md">
         <a href="/" className="text-3xl font-bold">
-          Home
+          To Blog
         </a>
         <SearchBar />
         <div className="flex items-center space-x-3">
@@ -107,7 +107,7 @@ const Header = () => {
           ) : (
             <button
               onClick={handleGoogleLogin}
-              className="flex w-44 items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-white transition duration-200 hover:bg-blue-600"
+              className="flex w-44 items-center justify-center rounded-md bg-gradient-to-r from-yellow-800 to-red-700 px-4 py-2 text-white transition duration-200 hover:scale-x-105"
             >
               Login with Google
             </button>

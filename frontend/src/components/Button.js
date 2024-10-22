@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Button = ({ label, color = 'blue', onClick }) => {
-  const buttonColor = color === 'blue' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-500 hover:bg-gray-600';
+const Button = ({ label, color = 'none', onClick }) => {
+  const buttonColor = color === 'none' ? 'bg-slate-800 hover:bg-slate-600' : `bg-${color}-500 hover:bg-${color}-600`;
 
   return (
     <button

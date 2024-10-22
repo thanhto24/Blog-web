@@ -113,47 +113,51 @@ const UserProfile = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="mb-6 flex items-center justify-between">
-        {/* Avatar và Tên người dùng */}
-        <div className="flex items-center">
-          <img
-            src={profilePic}
-            alt="User Avatar"
-            className="mr-3 h-12 w-12 rounded-full"
-          />
-          <h2 className="text-xl font-bold">{name}</h2>{' '}
-          {/* Thay đổi với tên người dùng nếu cần */}
-        </div>
-
-        {/* Nút Setting hoặc trạng thái Follow/Unfollow */}
-        {localStorageEmail === email ? (
-          <button
-            className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            onClick={handleToggleSetting}
-          >
-            {showSetting ? 'Close Settings' : 'Open Settings'}
-          </button>
-        ) : (
-          <button
-            className={`rounded-lg px-4 py-2 font-semibold text-white transition duration-200 focus:outline-none ${isFollowing ? 'bg-red-600 hover:bg-red-500' : 'bg-green-600 hover:bg-green-500'}`}
-            onClick={handleFollowToggle}
-          >
-            {isFollowing ? 'Unfollow' : 'Follow'}
-          </button>
-        )}
-      </div>
-
-      {/* Chỉ hiển thị UserSetting nếu showSetting là true */}
-      {showSetting && <UserSetting handleToggleSetting={handleToggleSetting} />}
-
-      {/* Hiển thị tất cả bài viết */}
-      <h3 className="mb-6 text-2xl font-semibold text-gray-800">Post of {name} </h3>
-      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
-        {userPosts.map((post) => (
-          <ShortPost key={post._id} post={post} />
-        ))}
-      </div>
+  <div className="mb-6 flex items-center justify-between">
+    {/* Avatar and Username */}
+    <div className="flex items-center">
+      <img
+        src={profilePic}
+        alt="User Avatar"
+        className="mr-3 h-12 w-12 rounded-full"
+      />
+      <h2 className="text-xl font-bold">{name}</h2>
     </div>
+
+    {/* Settings or Follow/Unfollow button */}
+    {localStorageEmail === email ? (
+      <button
+        className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+        onClick={handleToggleSetting}
+      >
+        {showSetting ? 'Close Settings' : 'Open Settings'}
+      </button>
+    ) : (
+      <button
+        className={`rounded-lg px-4 py-2 font-semibold text-white transition duration-200 focus:outline-none ${isFollowing ? 'bg-red-600 hover:bg-red-500' : 'bg-green-600 hover:bg-green-500'}`}
+        onClick={handleFollowToggle}
+      >
+        {isFollowing ? 'Unfollow' : 'Follow'}
+      </button>
+    )}
+  </div>
+
+  {/* Show UserSetting if showSetting is true */}
+  {showSetting && <UserSetting handleToggleSetting={handleToggleSetting} />}
+
+  {/* Display all posts */}
+  <h3 className="mb-6 text-2xl font-semibold text-gray-800">Posts of {name}</h3>
+  
+  {/* Container for user posts with scrolling enabled */}
+  <div className="h-96 overflow-y-scroll scroll-hidden rounded-lg border border-gray-300 bg-gray-700 p-4 mb-4">
+    <div className="grid w-full grid-cols-2 gap-6 p-4">
+      {userPosts.map((post) => (
+        <ShortPost key={post._id} post={post} />
+      ))}
+    </div>
+  </div>
+</div>
+
   );
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 const CategorySite = () => {
   const categorySlugs = {
     'Thời sự': 'thoi-su',
@@ -26,7 +25,7 @@ const CategorySite = () => {
           <Link
             key={category}
             to={`/posts/search/${categorySlugs[category]}`}
-            className="rounded-md bg-blue-500 px-4 py-2 text-white transition duration-200 hover:bg-blue-600"
+            className="rounded-md bg-slate-800 px-4 py-2 text-white transition duration-200 hover:bg-slate-700 hover:text-orange-200"
           >
             {category}
           </Link>

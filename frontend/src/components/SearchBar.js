@@ -24,12 +24,12 @@ const SearchBar = () => {
         onChange={handleInputChange}
         placeholder="Search..."
         aria-label="Search"
-        className="rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500"
       />
       <button
         type="submit" // Make button submit the form
         aria-label="Submit Search"
-        className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+        className="rounded bg-gradient-to-r from-gray-700 to-cyan-800 px-4 py-2 font-bold text-white transition duration-200 hover:scale-105"
       >
         Search
       </button>

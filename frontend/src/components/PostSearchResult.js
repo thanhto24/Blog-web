@@ -53,7 +53,7 @@ const PostSearchResult = () => {
           Search Results
         </h2>
       <div className="mx-auto mt-10 mb-10 min-h-screen min-w-max max-w-4xl rounded-lg bg-gray-100 p-4 shadow-md">
-        <div className="max-h-80 min-h-screen overflow-y-auto">
+        <div className="max-h-80 min-h-screen overflow-y-auto scroll-hidden my-10">
           {safePostList ? (
             <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
               {safePostList.map((post) => (

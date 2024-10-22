@@ -10,9 +10,9 @@ const PopularPost = ({ listPost }) => {
           <Link
             to={`/posts/id/${post._id}`}
             key={post._id}
-            className="rounded-lg border bg-white p-4 shadow-md transition-shadow hover:shadow-lg"
+            className="rounded-lg border bg-slate-800 p-4 shadow-md transition-shadow hover:shadow-lg"
           >
-            <h3 className="mb-2 h-[3rem] overflow-hidden break-words text-lg font-semibold">
+            <h3 className="text-slate-200 mb-2 h-[4rem] overflow-hidden break-words text-lg font-semibold">
               {post.title}
             </h3>
             <img
@@ -21,12 +21,12 @@ const PopularPost = ({ listPost }) => {
               className="mb-2 h-40 w-full rounded-lg object-cover"
             />
             {post.description && (
-              <p className="mb-2 overflow-hidden text-gray-600">
+              <p className="mb-2 overflow-hidden text-slate-300">
                 {post.description}
               </p>
             )}
             {!post.description && (
-              <p className="mb-2 h-[3rem] text-gray-600">
+              <p className="mb-2 h-[3rem] overflow-hidden text-slate-300">
                 No description available
               </p>
             )}

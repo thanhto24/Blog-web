@@ -26,7 +26,7 @@ const Home = () => {
         </div>
 
         {/* ShortPost takes 3/10 (30%) */}
-        <div className="col-span-3 mr-2 mt-4 h-screen space-y-4 overflow-y-scroll rounded-2xl bg-red-200 p-5">
+        <div className="col-span-3 mr-2 mt-4 h-screen space-y-4 overflow-y-scroll scroll-hidden rounded-2xl bg-gray-400 p-5 pb-20">
           <h1 className="mb-5 text-3xl font-bold">Newest Post</h1>
           {posts.map((post) => (
             <ShortPost key={post._id} post={post} />
