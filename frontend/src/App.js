@@ -13,23 +13,30 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/AutoScrollTop';
 import UserProfile from './pages/UserProfile/UserProfile';
 import ListFollowing from './pages/UserProfile/components/ListFollowing';
-
+import NotFound from './pages/NotFound/NotFound';
 const App = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="App flex flex-col min-h-screen"> {/* Sử dụng flexbox với chiều cao tối thiểu */}
+      <div className="App flex min-h-screen flex-col">
+        {' '}
+        {/* Sử dụng flexbox với chiều cao tối thiểu */}
         <Header />
-        <div className="mt-[12rem] flex-grow"> {/* Flex-grow để nội dung mở rộng */}
+        <div className="mt-[12rem] flex-grow">
+          {' '}
+          {/* Flex-grow để nội dung mở rộng */}
           <PostProvider>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/create-post" element={<PostAndImage />} />
               <Route path="/posts/id/:id" element={<Detail />} />
-              <Route path="/posts/search/:search" element={<PostSearchResult />} />
+              <Route
+                path="/posts/search/:search"
+                element={<PostSearchResult />}
+              />
               <Route path="/user-profile/:email" element={<UserProfile />} />
               <Route path="/user/follow/all" element={<ListFollowing />} />
-              {/* Thêm nhiều route nếu cần */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </PostProvider>
         </div>

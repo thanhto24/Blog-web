@@ -31,7 +31,7 @@ const getRelatedPosts = async (req, res) => {
     return res.status(400).json({ error: "No data provided" });
   }
 
-  const tags = data.split(","); // Split tags if multiple are passed
+  const tags = data.split(",") || ['a']; // Split tags if multiple are passed
 
   try {
     const relatedPosts = await postService.getRelatedPosts(tags); // Pass the tags to your function

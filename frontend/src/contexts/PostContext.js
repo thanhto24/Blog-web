@@ -52,36 +52,39 @@ export const PostProvider = ({ children }) => {
   };
 
   const fetchRelatedPosts = async (relatedData) => {
+    // Ensure relatedData is valid
+    if (!Array.isArray(relatedData) || relatedData.length === 0) {
+      // console.error("relatedData must be a non-empty array");
+      return;
+    }
+  
     try {
-      if (!Array.isArray(relatedData)) {
-        throw new Error('relatedData must be an array');
-      }
-
       const query = relatedData.join(',');
-
+  
       const response = await fetch(
-        `http://localhost:5000/posts/related?data=${encodeURIComponent(query)}`,
+        `http://localhost:5000/posts/related?data=${query}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         }
       );
-
+  
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
-
+  
       const data = await response.json();
-
+  
       if (Array.isArray(data)) {
         setRelatedPosts(data);
       } else {
         throw new Error('Unexpected response format: expected an array');
       }
     } catch (error) {
-      console.error('Failed to fetch related posts:', error);
+      console.error('Error fetching related posts:', error);
     }
   };
+  
 
   const fetchPostById = async (id) => {
     try {

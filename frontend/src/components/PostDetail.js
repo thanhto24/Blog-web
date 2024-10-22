@@ -33,7 +33,8 @@ const PostDetail = ({ post }) => {
         console.error('Failed to check follow status:', error);
       }
     };
-    fetchFollowStatus();
+    if (email !== post.owner && email && post.owner)
+      fetchFollowStatus();
   }, [post, post.owner]);
 
   const handleFollow = async () => {
