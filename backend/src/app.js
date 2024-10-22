@@ -29,14 +29,14 @@ app.use(passport.session());
 
 // Connect to MongoDB (replace with your connection string)
 const MongoDB_URI = process.env.MONGODB_URI;
-console.log(MongoDB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// console.log(MongoDB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 mongoose.connect(MongoDB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.log(err));
+  // .then(() => console.log('Connected to MongoDB'))
+  // .catch((err) => console.log(err));
 
 // Use the routes from index.js
 app.use('/', routes);
@@ -49,5 +49,5 @@ app.get('/', (_, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  // console.log(`Server is running on port ${PORT}`);
 });

@@ -105,7 +105,7 @@ const ActionBar = ({ postId }) => {
 
   const handleReport = (reason) => {
     fetchSendEmail(reason);
-    console.log(`Report reason: ${reason}`);
+    // console.log(`Report reason: ${reason}`);
     showPopup('This post has been reported successfully!', 'success');
   };
 

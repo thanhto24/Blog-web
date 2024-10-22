@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // Create a new comment
 const createComment = async (data) => {
-  console.log("Comment service post with data: ", data);
+  // console.log("Comment service post with data: ", data);
   const {
     comment_ava_url,
     comment_text,

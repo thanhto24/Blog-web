@@ -17,7 +17,7 @@ const likePost = async (req, res) => {
 
 const checkLiked = async (req, res) => {
   const { email, postId } = req.body;
-  console.log("Checking like status for:", email, postId);
+  // console.log("Checking like status for:", email, postId);
   // Validate input
   if (!email || !postId) {
     return res.status(400).json({ error: "Email and postId are required" });
@@ -39,7 +39,7 @@ const checkLiked = async (req, res) => {
 
 const unlikePost = async (req, res) => {
   const { email, postId } = req.body; // Get email and postId from req.body
-  console.log("Unliking post:", email, postId);
+  // console.log("Unliking post:", email, postId);
   if (!email || !postId) {
     return res.status(400).json({ error: "Email and postId are required" });
   }
@@ -55,7 +55,7 @@ const unlikePost = async (req, res) => {
 
 const getAllLikedPosts = (req, res) => {
   const { email } = req.body;
-  console.log("Get all liked posts for:", email);
+  // console.log("Get all liked posts for:", email);
   if (!email) {
     return res.status(400).json({ error: "Email is required" });
   }
@@ -107,7 +107,7 @@ const getAllFollowing = async (req, res) => {
 
   try {
     const user = await userService.getAllFollowing(email);
-    console.log("Find users controller: ", user);
+    // console.log("Find users controller: ", user);
     res.json(user);
   } catch (error) {
     console.error("Error fetching following users:", error);

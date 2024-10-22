@@ -4,7 +4,7 @@ const postService = require("../services/post");
 
 // Controller for creating a post
 const createPost = async (req, res) => {
-  console.log("Post controller post with data: ", req.body);
+  // console.log("Post controller post with data: ", req.body);
   try {
     const post = await postService.createPost(req.body);
     res.status(201).json(post);

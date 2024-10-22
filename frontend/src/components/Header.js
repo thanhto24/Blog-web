@@ -49,7 +49,7 @@ const Header = () => {
       const tokenFromUrl = params.get('token'); // Get the token from the URL
 
       if (tokenFromUrl) {
-        console.log('Token from URL:', tokenFromUrl);
+        // console.log('Token from URL:', tokenFromUrl);
         const decoded = await decodedToken(tokenFromUrl);
         if (decoded) {
           setToken(tokenFromUrl); // Store the token in state
@@ -79,27 +79,32 @@ const Header = () => {
   }, [navigate]); // Add navigate as a dependency
 
   return (
-    <div className="fixed left-0 top-0 z-50 block w-full">
+    <div className="fixed left-0 top-0 z-50 w-full flex-wrap items-center place-content-center">
       {/* Ensuring header stays at the top */}
-      <header className="flex items-center justify-between bg-white p-5 shadow-md">
-        <a href="/" className="text-3xl font-bold">
+      <header className="flex flex-wrap items-center justify-between bg-white p-4 md:p-5 shadow-md">
+        <a href="/" className="text-xl md:text-3xl font-bold">
           To Blog
         </a>
-        <SearchBar />
-        <div className="flex items-center space-x-3">
+
+        {/* Add responsive search bar */}
+        <div className="w-full md:w-auto">
+          <SearchBar />
+        </div>
+
+        <div className="flex flex-wrap items-center space-x-3 max-w-full">
           {user ? (
             <>
-              <span className="text-lg">Hello, {user.username}!</span>
+              <span className="text-md md:text-lg">Hello, {user.username}!</span>
               <Link to={`/user-profile/${user.email}`} className="flex items-center">
-              <img
+                <img
                   src={user.profilePic}
                   alt={`${user.username}'s profile`}
-                  className="h-10 w-10 rounded-full"
+                  className="h-8 w-8 md:h-10 md:w-10 rounded-full"
                 />
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex w-32 items-center justify-center rounded-md bg-red-500 px-4 py-2 text-white transition duration-200 hover:bg-red-600"
+                className="flex w-28 md:w-32 items-center justify-center rounded-md bg-red-500 px-4 py-2 text-white transition duration-200 hover:bg-red-600"
               >
                 Logout
               </button>
@@ -107,14 +112,18 @@ const Header = () => {
           ) : (
             <button
               onClick={handleGoogleLogin}
-              className="flex w-44 items-center justify-center rounded-md bg-gradient-to-r from-yellow-800 to-red-700 px-4 py-2 text-white transition duration-200 hover:scale-x-105"
+              className="flex w-full md:w-44 items-center justify-center rounded-md bg-gradient-to-r from-yellow-800 to-red-700 px-4 py-2 text-white transition duration-200 hover:scale-x-105"
             >
               Login with Google
             </button>
           )}
         </div>
       </header>
-      <CategorySite />
+
+      {/* <div className="mt-16"> */}
+        {/* Push content down so it doesn't overlap with the fixed header */}
+        <CategorySite />
+      {/* </div> */}
     </div>
   );
 };

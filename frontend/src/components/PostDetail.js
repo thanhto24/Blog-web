@@ -105,7 +105,7 @@ const PostDetail = ({ post }) => {
           {post.owner !== email && (
             <button
               onClick={handleFollowToggle}
-              className={`rounded-md border border-gray-500 px-4 py-1 ${isFollowing ? 'bg-gray-500 text-white' : ''}`}
+              className={`rounded-md text-white border border-gray-500 px-4 py-1 ${isFollowing ? 'bg-red-600 hover:bg-red-500' : 'bg-green-600 hover:bg-green-500'}`}
             >
               {isFollowing ? 'Unfollow' : 'Follow'}
             </button>

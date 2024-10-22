@@ -33,7 +33,7 @@ router.post("/", upload.single("image"), async (req, res) => {
 // Endpoint to retrieve all images
 router.get("/", async (req, res) => {
   const image_owner = req.query.image_owner;
-  console.log("image_owner", image_owner);
+  // console.log("image_owner", image_owner);
   try {
     const images = await Image.find({ image_owner: image_owner });
 

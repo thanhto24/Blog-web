@@ -127,7 +127,7 @@ const UserProfile = () => {
     {/* Settings or Follow/Unfollow button */}
     {localStorageEmail === email ? (
       <button
-        className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg transition duration-200 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+        className="rounded-lg bg-slate-600 px-4 py-2 font-semibold text-white shadow-lg transition duration-200 hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
         onClick={handleToggleSetting}
       >
         {showSetting ? 'Close Settings' : 'Open Settings'}

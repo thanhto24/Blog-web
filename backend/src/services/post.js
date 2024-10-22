@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 // Create a new post
 const createPost = async (data) => {
-  console.log("Post service post with data: ", data);
+  // console.log("Post service post with data: ", data);
   const {
     title,
     slug,
@@ -41,7 +41,7 @@ const getAllPosts = async () => {
 
 const getRelatedPosts = async (relatedData) => {
   try {
-    console.log("Getting related posts");
+    // console.log("Getting related posts");
 
     // Initialize an array to hold all the unique related posts
     const allRelatedPosts = new Set();
@@ -75,7 +75,7 @@ const getRelatedPosts = async (relatedData) => {
 
 // Fetch a single post by ID
 const getPostById = async (id) => {
-  console.log("Getting post by ID: ", id);
+  // console.log("Getting post by ID: ", id);
   return await Post.findById(id);
 };
 
@@ -93,7 +93,7 @@ const getByCondition = async (searchTerm) => {
 };
 
 const getUserPosts = async (email) => {
-  console.log("Getting user posts by email: ", email);
+  // console.log("Getting user posts by email: ", email);
   return await Post.find({ owner: email });
 };
 

@@ -18,14 +18,14 @@ const ShortPost = ({ post, editMode = false }) => {
   const handleEdit = async (e) => {
     e.preventDefault();
     navigate("/create-post", { state: { post } }); // Pass the post data using state
-    console.log('Edit post:', post._id);
+    // console.log('Edit post:', post._id);
   };
   
 
   const handleDelete = (e) => {
     e.preventDefault();
     deletePost(post._id);
-    console.log('Delete post:', post._id);
+    // console.log('Delete post:', post._id);
   };
 
   return (

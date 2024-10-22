@@ -2,7 +2,7 @@ const commentService = require('../services/comment');
 
 // Controller for creating a comment
 const createComment = async (req, res) => {
-  console.log('Comment controller post with data: ', req.body);
+  // console.log('Comment controller post with data: ', req.body);
   try {
     const comment = await commentService.createComment(req.body);
     res.status(201).json(comment);

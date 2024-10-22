@@ -11,20 +11,20 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault(); // Prevent form submission
-    console.log('Search query:', query);
+    // console.log('Search query:', query);
     navigate(`/posts/search/${query}`); // Navigate to the search page
     setQuery('');
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex items-center space-x-2">
+    <form onSubmit={handleSearch} className="flex flex-wrap items-center space-x-2">
       <input
         type="text"
         value={query}
         onChange={handleInputChange}
         placeholder="Search..."
         aria-label="Search"
-        className="rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        className="rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500 max-w-full"
       />
       <button
         type="submit" // Make button submit the form
