@@ -26,7 +26,7 @@ const CommentList = ({ postId }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/comments/${postId}`);
+      const response = await fetch(`https://blog-web-be.vercel.app/comments/${postId}`);
       if (!response.ok)
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       const data = await response.json();
@@ -41,7 +41,7 @@ const CommentList = ({ postId }) => {
 
     if (newComment.trim()) {
       try {
-        const response = await fetch('http://localhost:5000/comments', {
+        const response = await fetch('https://blog-web-be.vercel.app/comments', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

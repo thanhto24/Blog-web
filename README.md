@@ -6,7 +6,7 @@ Chào mừng bạn đến với blog của tôi! Đây là nơi tôi chia sẻ n
 
 ## 📚 Nội dung của Blog
 
-- **[Liên kết đến trang chủ](http://localhost:3000/)**: Khám phá bài viết mới nhất của tôi!
+- **[Liên kết đến trang chủ](https://blog-web-fe.vercel.app/)**: Khám phá bài viết mới nhất của tôi!
 
 
 ---
