@@ -9,10 +9,12 @@ const passport = require('./services/auth'); // Load the service for Google Auth
 
 const app = express();
 
-// Middleware to parse JSON bodies
 app.use(cors({
-  origin: 'https://blog-web-fe.vercel.app'
+  origin: '*', 
+  methods: '*', 
+  allowedHeaders: '*' 
 }));
+
 app.use(express.json());
 
 app.use(session({
