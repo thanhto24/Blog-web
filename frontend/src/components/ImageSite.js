@@ -8,7 +8,7 @@ const ImageSite = ({ refreshImages }) => {
 
   const fetchImages = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/images?image_owner=${userEmail}`, {
+      const response = await fetch(`https://blog-web-be.vercel.app/images?image_owner=${userEmail}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -36,7 +36,7 @@ const ImageSite = ({ refreshImages }) => {
   }, [refreshImages]);
 
   const handleCopyUrl = (id) => {
-    const url = `http://localhost:5000/images/${id}`;
+    const url = `https://blog-web-be.vercel.app/images/${id}`;
     navigator.clipboard
       .writeText(url)
       .then(() => {
@@ -58,7 +58,7 @@ const ImageSite = ({ refreshImages }) => {
               className="overflow-hidden rounded-md bg-white p-4 shadow"
             >
               <img
-                src={`http://localhost:5000/images/${image._id}`}
+                src={`https://blog-web-be.vercel.app/images/${image._id}`}
                 alt={image.image_name + '. This image created by ' + image.image_owner}
                 className="mb-2 h-20 w-full cursor-pointer rounded object-cover" // Set a consistent height
                 onClick={() => handleCopyUrl(image._id)}
