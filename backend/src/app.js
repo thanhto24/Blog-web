@@ -10,7 +10,7 @@ const passport = require('./services/auth'); // Load the service for Google Auth
 const app = express();
 
 app.use(cors({
-  origin: '*', 
+  origin: 'https://blog-web-fe.vercel.app',
   methods: '*', 
   allowedHeaders: '*' 
 }));
