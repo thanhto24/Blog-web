@@ -11,7 +11,7 @@ const UserProfile = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/users/get-user`, {
+      const response = await fetch(`https://blog-web-be.vercel.app/users/get-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email }),
@@ -43,7 +43,7 @@ const UserProfile = () => {
     const fetchFollowStatus = async () => {
       try {
         const response = await fetch(
-          'http://localhost:5000/users/check-follow',
+          'https://blog-web-be.vercel.app/users/check-follow',
           {
             method: 'POST',
             headers: {
@@ -71,7 +71,7 @@ const UserProfile = () => {
 
   const handleFollow = async () => {
     try {
-      const response = await fetch('http://localhost:5000/users/follow', {
+      const response = await fetch('https://blog-web-be.vercel.app/users/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const UserProfile = () => {
 
   const handleUnfollow = async () => {
     try {
-      const response = await fetch('http://localhost:5000/users/unfollow', {
+      const response = await fetch('https://blog-web-be.vercel.app/users/unfollow', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

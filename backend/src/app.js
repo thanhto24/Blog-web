@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware to parse JSON bodies
 app.use(cors({
-  origin: 'http://localhost:3000', // Your frontend origin
+  origin: 'https://blog-web-fe.vercel.app', // Your frontend origin
   credentials: true // This allows sending cookies with the request
 }));
 app.use(express.json());

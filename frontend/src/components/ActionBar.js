@@ -15,7 +15,7 @@ const ActionBar = ({ postId }) => {
   // Function to check if the post is already liked
   const fetchCheckLike = async (e) => {
     try {
-      const response = await fetch('http://localhost:5000/users/check-like', {
+      const response = await fetch('https://blog-web-be.vercel.app/users/check-like', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const ActionBar = ({ postId }) => {
   const fetchLikeAction = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/users/like', {
+      const response = await fetch('https://blog-web-be.vercel.app/users/like', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const ActionBar = ({ postId }) => {
   const fetchUnlikeAction = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/users/unlike', {
+      const response = await fetch('https://blog-web-be.vercel.app/users/unlike', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const ActionBar = ({ postId }) => {
 
   const fetchSendEmail = async (reason) => {
     try {
-      const response = await fetch('http://localhost:5000/email/send-email', {
+      const response = await fetch('https://blog-web-be.vercel.app/email/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const ActionBar = ({ postId }) => {
           to: email,
           subject: 'Report Post from Blog-web',
           messageObj: {
-            link: 'http://localhost:3000/posts/id/' + postId,
+            link: 'https://blog-web-fe.vercel.app/posts/id/' + postId,
             msg: ['The post below has been reported!', `Reason: ${reason}`, 'Please check and take action!'],
           },
         }),

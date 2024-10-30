@@ -36,7 +36,7 @@ const ImageCreate = ({
     formData.append('image_owner', userEmail); // Hardcoded user ID
 
     try {
-      const response = await fetch('http://localhost:5000/images', {
+      const response = await fetch('https://blog-web-be.vercel.app/images', {
         method: 'POST',
         body: formData,
       });
