@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware to parse JSON bodies
 app.use(cors({
-  origin: '*', // Allow all origins
+  origin: 'https://blog-web-fe.vercel.app'
 }));
 app.use(express.json());
 
