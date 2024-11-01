@@ -36,7 +36,7 @@ const ImageCreate = ({
     formData.append('image_owner', userEmail); // Hardcoded user ID
 
     try {
-      const response = await fetch('https://my-blog-be.onrender.com/images', {
+      const response = await fetch('https://blog-web-be-a7k7.onrender.com/images', {
         method: 'POST',
         body: formData,
       });

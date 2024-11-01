@@ -10,7 +10,7 @@ const Header = () => {
 
   // Function to handle Google login
   const handleGoogleLogin = () => {
-    window.location.href = 'https://my-blog-be.onrender.com/auth/google'; // Redirect to the backend route for Google login
+    window.location.href = 'https://blog-web-be-a7k7.onrender.com/auth/google'; // Redirect to the backend route for Google login
   };
 
   // Logout function
@@ -24,7 +24,7 @@ const Header = () => {
   // Function to decode the JWT token
   const decodedToken = async (token) => {
     try {
-      const response = await fetch('https://my-blog-be.onrender.com/auth/decodeToken', {
+      const response = await fetch('https://blog-web-be-a7k7.onrender.com/auth/decodeToken', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token }), // Send token in the body

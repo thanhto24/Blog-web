@@ -26,7 +26,7 @@ const CommentList = ({ postId }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`https://my-blog-be.onrender.com/comments/${postId}`);
+      const response = await fetch(`https://blog-web-be-a7k7.onrender.com/comments/${postId}`);
       if (!response.ok)
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       const data = await response.json();
@@ -41,7 +41,7 @@ const CommentList = ({ postId }) => {
 
     if (newComment.trim()) {
       try {
-        const response = await fetch('https://my-blog-be.onrender.com/comments', {
+        const response = await fetch('https://blog-web-be-a7k7.onrender.com/comments', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

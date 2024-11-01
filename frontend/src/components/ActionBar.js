@@ -15,7 +15,7 @@ const ActionBar = ({ postId }) => {
   // Function to check if the post is already liked
   const fetchCheckLike = async (e) => {
     try {
-      const response = await fetch('https://my-blog-be.onrender.com/users/check-like', {
+      const response = await fetch('https://blog-web-be-a7k7.onrender.com/users/check-like', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const ActionBar = ({ postId }) => {
   const fetchLikeAction = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://my-blog-be.onrender.com/users/like', {
+      const response = await fetch('https://blog-web-be-a7k7.onrender.com/users/like', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const ActionBar = ({ postId }) => {
   const fetchUnlikeAction = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://my-blog-be.onrender.com/users/unlike', {
+      const response = await fetch('https://blog-web-be-a7k7.onrender.com/users/unlike', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const ActionBar = ({ postId }) => {
 
   const fetchSendEmail = async (reason) => {
     try {
-      const response = await fetch('https://my-blog-be.onrender.com/email/send-email', {
+      const response = await fetch('https://blog-web-be-a7k7.onrender.com/email/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
