@@ -17,7 +17,7 @@ export const PostProvider = ({ children }) => {
 
   const fetchUserPosts = async (email) => {
     try {
-      const response = await fetch(`https://blog-web-be.vercel.app/posts/your-post/${email||userEmail}`, {
+      const response = await fetch(`https://my-blog-be.onrender.com/posts/your-post/${email||userEmail}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -35,7 +35,7 @@ export const PostProvider = ({ children }) => {
 
   const fetchAllPosts = async () => {
     try {
-      const response = await fetch('https://blog-web-be.vercel.app/posts', {
+      const response = await fetch('https://my-blog-be.onrender.com/posts', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -62,7 +62,7 @@ export const PostProvider = ({ children }) => {
       const query = relatedData.join(',');
   
       const response = await fetch(
-        `https://blog-web-be.vercel.app/posts/related?data=${query}`,
+        `https://my-blog-be.onrender.com/posts/related?data=${query}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -88,7 +88,7 @@ export const PostProvider = ({ children }) => {
 
   const fetchPostById = async (id) => {
     try {
-      const response = await fetch(`https://blog-web-be.vercel.app/posts/id/${id}`, {
+      const response = await fetch(`https://my-blog-be.onrender.com/posts/id/${id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -107,7 +107,7 @@ export const PostProvider = ({ children }) => {
   const fetchPostSearch = async (searchTerm) => {
     try {
       const response = await fetch(
-        `https://blog-web-be.vercel.app/posts/search/${searchTerm}`,
+        `https://my-blog-be.onrender.com/posts/search/${searchTerm}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -127,7 +127,7 @@ export const PostProvider = ({ children }) => {
 
   const fetchUserLikedPosts = async () => {
     try {
-      const response = await fetch('https://blog-web-be.vercel.app/users/liked-posts', {
+      const response = await fetch('https://my-blog-be.onrender.com/users/liked-posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: userEmail }),
@@ -146,7 +146,7 @@ export const PostProvider = ({ children }) => {
 
   const createPost = async (postData) => {
     try {
-      const response = await fetch('https://blog-web-be.vercel.app/posts', {
+      const response = await fetch('https://my-blog-be.onrender.com/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postData),
@@ -166,7 +166,7 @@ export const PostProvider = ({ children }) => {
 
   const updatePost = async (id, postData) => {
     try {
-      const response = await fetch(`https://blog-web-be.vercel.app/posts/${id}`, {
+      const response = await fetch(`https://my-blog-be.onrender.com/posts/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postData),
@@ -188,7 +188,7 @@ export const PostProvider = ({ children }) => {
 
   const deletePost = async (id) => {
     try {
-      const response = await fetch(`https://blog-web-be.vercel.app/posts/${id}`, {
+      const response = await fetch(`https://my-blog-be.onrender.com/posts/${id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       });

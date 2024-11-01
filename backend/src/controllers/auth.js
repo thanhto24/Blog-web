@@ -24,7 +24,7 @@ const decodeToken = async (req, res) => {
 const googleCallback = (req, res) => {
   passport.authenticate('google', async (err, user) => {
     if (err || !user) {
-      return res.redirect('https://blog-web-fe.vercel.app'); // Redirect to frontend login on failure
+      return res.redirect('https://my-blog.onrender.com'); // Redirect to frontend login on failure
     }
 
     try {
@@ -39,10 +39,10 @@ const googleCallback = (req, res) => {
       const token = jwt.sign(payload, '3b30c0c9b2f1ec21f3a4df191c1e836dfbc2db186d7325cf46cdb9c9b6e7b6c3', { expiresIn: '1h' }); // Use a secure secret key
 
       // Redirect to the frontend with the token
-      res.redirect(`https://blog-web-fe.vercel.app?token=${token}`);
+      res.redirect(`https://my-blog.onrender.com?token=${token}`);
     } catch (error) {
       console.error('Error generating token:', error);
-      res.redirect('https://blog-web-fe.vercel.app'); // Handle error and redirect
+      res.redirect('https://my-blog.onrender.com'); // Handle error and redirect
     }
   })(req, res);
 };
@@ -52,12 +52,12 @@ const facebookAuth = passport.authenticate('facebook', { scope: ['email'] });
 const facebookCallback = (req, res) => {
   passport.authenticate('facebook', (err, user) => {
     if (err || !user) {
-      return res.redirect('https://blog-web-fe.vercel.app/login'); // Redirect to frontend login on failure
+      return res.redirect('https://my-blog.onrender.com/login'); // Redirect to frontend login on failure
     }
 
     // Successful login, send user back to frontend with user data or token
     const token = 'some-jwt-token'; // Generate a token if needed
-    res.redirect(`https://blog-web-fe.vercel.app/dashboard?token=${token}`);
+    res.redirect(`https://my-blog.onrender.com/dashboard?token=${token}`);
   })(req, res);
 };
 

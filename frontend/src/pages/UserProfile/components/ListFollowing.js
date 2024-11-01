@@ -11,7 +11,7 @@ const ListFollowing = () => {
     useEffect(() => {
         const fetchFollowing = async () => {
             try {
-                const response = await fetch('https://blog-web-be.vercel.app/users/following', {
+                const response = await fetch('https://my-blog-be.onrender.com/users/following', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const ListFollowing = () => {
         setFadeOutUser(user);  // Start fade-out animation
         setTimeout(async () => {
             try {
-                const response = await fetch('https://blog-web-be.vercel.app/users/unfollow', {
+                const response = await fetch('https://my-blog-be.onrender.com/users/unfollow', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
