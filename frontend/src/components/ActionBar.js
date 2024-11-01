@@ -91,7 +91,7 @@ const ActionBar = ({ postId }) => {
           to: email,
           subject: 'Report Post from Blog-web',
           messageObj: {
-            link: 'https://my-blog.onrender.com/posts/id/' + postId,
+            link: 'https://blog-web-aiyr.onrender.com/posts/id/' + postId,
             msg: ['The post below has been reported!', `Reason: ${reason}`, 'Please check and take action!'],
           },
         }),

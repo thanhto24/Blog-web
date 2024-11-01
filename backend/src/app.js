@@ -10,7 +10,7 @@ const passport = require('./services/auth'); // Load the service for Google Auth
 const app = express();
 
 app.use(cors({
-  origin: 'https://my-blog.onrender.com',
+  origin: 'https://blog-web-aiyr.onrender.com',
   methods: '*', 
   allowedHeaders: '*' 
 }));
