@@ -44,7 +44,7 @@ mongoose.connect(MongoDB_URI)
 app.use('/', routes);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 app.get('/', (_, res) => {
   res.send('Hello World!');
